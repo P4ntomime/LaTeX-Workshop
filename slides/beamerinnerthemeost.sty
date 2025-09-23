@@ -1,0 +1,72 @@
+\mode<presentation>
+
+\newcommand{\TitleBackground}{%
+    \AddToShipoutPictureBG*{%
+        \put (0,0){\usebeamercolor{frame title main}\color{bg}\rule{\paperwidth}{\paperheight}}%
+        \put (0,0){\usebeamercolor{frame title left}\color{bg}\rule{.035\paperwidth}{\paperheight}}%
+    }
+}
+
+\setbeamertemplate{background}{%
+    % \begin{beamercolorbox}[wd=\paperwidth,ht=.9\paperheight]{default page}%
+        % \ifnum\thepage>1\relax%
+        % \else%
+        % % \begin{beamercolorbox}[wd=.05\paperwidth,ht=\paperheight]{frame title left}%
+        % % \end{beamercolorbox}%
+        % \begin{beamercolorbox}[wd=\paperwidth,ht=\paperheight]{frame title main}%
+        %     \vbox to\paperheight{\vfil\hbox to\paperwidth{\hfill\the\paperwidth\hfill}\vfil}%
+        % \end{beamercolorbox}%
+        % \fi%
+    % \end{beamercolorbox}%
+    % \ifnum\thepage>1\relax%
+    % \fi%
+    \begin{tikzpicture}
+        \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+        % \fill[color=darkgray] (0.035\paperwidth,0) rectangle(\the\paperwidth,\the\paperheight);
+        % \fill[color=subtitles] (0,0) rectangle(0.035\paperwidth,\the\paperheight);
+        \ifnum\thepage>1\relax%
+            \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+        \fi
+    \end{tikzpicture}
+}
+
+% Title page
+\defbeamertemplate*{title page}{ost}[1][]{%
+    % \hbox to\paperwidth{%
+    %     \hskip.035\paperwidth%
+    %     \vbox to\paperheight{%
+    %         \vskip.4\paperheight%
+    %         \hbox{\usebeamercolor{title page header}\color{fg}\usebeamerfont{title}\inserttitle\par}%
+    %         % \vskip0.125cm%
+    %         \hbox{\usebeamercolor{title page header}\color{fg}\usebeamerfont{subtitle}\insertsubtitle}%
+    %         % \vskip0.125cm%
+    %         \hbox{\usebeamercolor{author}\color{fg}\usebeamerfont{author}\insertauthor}%
+    %         % \vskip0.2cm%
+    %         \hbox{\usebeamercolor{date}\color{fg}\usebeamerfont{date}\insertshortinstitute~--~\insertdate}%
+    %         % \vfill\null%
+    %     }
+    % }
+    \TitleBackground%
+    % \begin{beamercolorbox}[wd=\paperwidth,ht=.9\paperheight,dp=0pt]{title page}%
+    \hbox to\paperwidth{%
+        \hspace*{.045\paperwidth}%
+        \vbox to\paperheight{%
+            \vspace*{0.4\paperheight}%
+            \hbox{\usebeamercolor[fg]{title page header}\usebeamerfont{title}\inserttitle\par}%
+            % \vspace{0.125cm}%
+            \hbox{\usebeamercolor[fg]{title page header}\usebeamerfont{subtitle}\insertsubtitle\par}%
+            % \vspace{0.125cm}%
+            \hbox{\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor}%
+            % \vspace{0.2cm}%
+            \hbox{\usebeamercolor[fg]{date}\usebeamerfont{date}\insertshortinstitute~--~\insertdate}%
+            \vfil
+        }
+    }
+    % \end{beamercolorbox}
+}
+
+% Items
+\setbeamertemplate{items}[square]
+\setbeamertemplate{sections/subsections in toc}[square]
+
+\mode<all>

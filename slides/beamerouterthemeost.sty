@@ -1,0 +1,23 @@
+\mode<presentation>
+
+% Frame title
+\defbeamertemplate*{frametitle}{ost}[1][]{%
+    \vskip-.4mm% This is needed for some reason. If you have the time, go figure out why and fix this, so it's correctly done
+    \begin{beamercolorbox}[wd=\paperwidth,ht=1.2cm]{frame title main}
+        \begin{beamercolorbox}[wd=.065\paperwidth,ht=1.2cm]{frame title left}
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.935\paperwidth,ht=1.2cm, leftskip=1em]{frame title main}
+        \ifx\insertframesubtitle\@empty%
+            \vbox to1.2cm{\vfil\hbox{\usebeamerfont{frametitlesingle}\insertframetitle{}}\vfil}%
+        \else%
+            \vbox to1.2cm{%
+                \vfil%
+                \hbox{\usebeamerfont{frametitle}\insertframetitle{}}%
+                \hbox{\usebeamercolor{frame title sub}\color{fg}\usebeamerfont{framesubtitle}\insertframesubtitle{}}%
+                \vfil%
+            }
+        \fi%
+        \end{beamercolorbox}%
+    \end{beamercolorbox}%
+}
+\mode<all>

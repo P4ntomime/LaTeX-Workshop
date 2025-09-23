@@ -1,0 +1,39 @@
+\documentclass[aspectratio=169]{beamer}
+
+% \input{preamble.tex}
+
+\title{\LaTeX{} Workshop}
+\subtitle{An Introductory Course}
+\author{Laurin Heitzer}
+\date{\the\year}
+\institute[OST]{Ostschweizer Fachhochschule}
+
+\usetheme{ost}
+% \usefonttheme{serif}
+\usepackage{inconsolata}            % inconsolata font for listings
+
+
+
+\begin{document}
+    \begin{frame}
+        \titlepage
+    \end{frame}
+    \begin{frame}
+        \frametitle{This is a frametitle}
+        \framesubtitle{This is a framesubtitle}
+        \begin{theorem}
+            This is a Theorem!
+        \end{theorem}
+        \begin{enumerate}
+            \item<1-| alert@1> Suppose $p$ were the largest prime number. 
+            \item<2-> Let $q$ be the product of the first $p$ numbers. 
+            \item<3-> Then $q+1$ is not divisible by any of them. 
+            \item<1-> But $q + 1$ is greater than $1$, thus divisible by some prime number not in the first $p$ numbers.
+        \end{enumerate}
+        \texttt{This is typewriter font}        
+    \end{frame}
+    \begin{frame}
+        \frametitle{No framesubtitle}
+        This is some frame        
+    \end{frame}
+\end{document}

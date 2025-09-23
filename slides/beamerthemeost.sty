@@ -1,0 +1,43 @@
+\mode<presentation>
+
+% Requirements
+\RequirePackage[utf8]{inputenc}         % input encoding: UTF-8
+\RequirePackage[T1]{fontenc}            % font encoding: T1
+
+\RequirePackage{textcomp}               % additional symbols
+\RequirePackage{mathptmx}               % set main and math font as times
+\RequirePackage{noto}
+% \RequirePackage{notomath}
+% \RequirePackage[scaled=0.92]{helvet}    % set sffont as helvet (scaled to 0.92)
+\RequirePackage{inconsolata}            % set ttfont (listings etc.) to consolas font
+
+\RequirePackage{anyfontsize}
+
+\RequirePackage{tikz}
+\RequirePackage{eso-pic}
+
+% Settings
+\useinnertheme{ost}
+\useoutertheme{ost}
+\usecolortheme{ost}
+\usefonttheme{serif}
+
+\setbeamerfont{title}{size=\fontsize{35}{33}\selectfont,family=\rmfamily}
+\setbeamerfont{subtitle}{size=\huge,family=\rmfamily,shape=\itshape}
+\setbeamerfont{author}{size=\normalsize,family=\rmfamily}
+\setbeamerfont{date}{size=\normalsize,family=\rmfamily}
+\setbeamerfont{frametitlesingle}{size=\Large,family=\rmfamily}
+\setbeamerfont{frametitle}{size=\large,family=\rmfamily}
+\setbeamerfont{framesubtitle}{size=\small,family=\rmfamily}
+
+\setbeamerfont{block title}{size=\large,family=\rmfamily}
+\setbeamerfont{block body}{size=\normalsize,family=\rmfamily,shape=\normalfont}
+
+% removes nav-symbols
+\setbeamertemplate{navigation symbols}{}
+
+% define block shapes (rounded corners with shadow)
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+
+\mode<all>
