@@ -12,14 +12,202 @@
 
 % \usetheme{Warsaw}
 % \usetheme{Marburg}
-\usetheme{Frankfurt}
+\usetheme{own}
+\addtobeamertemplate{note page}{}{\thispdfpagelabel{notes:\insertframenumber}}
+% \usecolortheme{own}
 % \usetheme{CambridgeUS}
-\usefonttheme{serif}
+% \usefonttheme{serif}
 % Theme options: Warsaw, Marburg, Frankfurt, CambridgeUS
 % \usefonttheme{serif}
 \usepackage{inconsolata}            % inconsolata font for listings
 
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{%
+  calc,
+  positioning,
+  backgrounds,
+  decorations.pathreplacing,
+  decorations.markings,
+  matrix,
+  arrows,
+  arrows.meta,
+  bending
+}
 
+
+\usepackage{pgf-pie}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
+\usepackage{hologo}
+
+\usepackage{graphicx}               % include graphics
+\usepackage[export]{adjustbox}
+
+\usepackage{listings}
+% colors for listings (code)
+\definecolor{backcolour}{HTML}{f5f5f0} % background color for highlighted text
+\definecolor{commentcolour}{HTML}{6a9955}
+\definecolor{keywordcolour}{HTML}{7f0055}
+\definecolor{stringcolour}{HTML}{9e22bd}
+\definecolor{numbercolour}{HTML}{808080}
+
+
+% basic listings style
+\lstdefinestyle{basestyle}{
+%   === Text Formatting (font, style and color) ===
+    basicstyle=\ttfamily,               % Monospaced font for code
+    commentstyle=\color{commentcolour}, % Only change color for comments
+    keywordstyle=\bfseries\color{keywordcolour},    % Bold and color for keywords
+    numberstyle=\ttfamily\tiny\color{numbercolour}, % Monospaced (tiny) font for line numbers
+    stringstyle=\color{stringcolour},   % Only change color for strings
+%   === Code Formatting (spacing, line breaks, etc.) ===
+    breakatwhitespace=false,    % Don't break only at whitespace
+    breaklines=true,            % Enable automatic line breaks (when lines are too long)
+    keepspaces=true,            % TODO: Check if it would be better without this
+    showspaces=false,           % Spaces set to invisible
+    showstringspaces=false,     % Spaces in strings set to invisible
+    showtabs=false,             % Don't show tab characters
+    tabsize=2,                  % Tab size set to 2 spaces (this refers to the spaces used for tabs inside the code)
+    columns=[l]fullflexible,    % Column formatting, see listings manual for more information
+%   === Frame and Background Formatting (borders, padding, etc.) ===
+    frame=single,           % Single frame around code
+    framexleftmargin=0.5ex, % Padding from left frame to code
+    framesep=2pt,           % Padding between frame and code
+    framerule=.8pt,          % Thickness of frame (set to 0pt for no frame)
+    % backgroundcolor=\color{backcolour}, % Background color
+    captionpos=b,           % Caption at the bottom
+%   === Size and Margin Setup ===
+    linewidth=\columnwidth, % Line width set to column width
+    xleftmargin=2.5ex,      % Left margin set to 2.5ex          % XXX: xleftmargin needs to be extended if line numbers reach 100
+%   === Line Number Formatting ===
+    numbers=left,   % Line numbers on the left
+    numbersep=2.5ex,  % Separation between line numbers and code
+%   === Encoding Setup ===
+    extendedchars=true,     % Allow for extended characters
+    inputencoding=cp1252,   % Windows-1252 encoding, as utf-8 is somewhat broken :(
+    escapeinside={(*@}{@*)},
+}
+
+% Define new if and new command for coloring angle brackets in listings after a # directive (e.g. #include <iostream>)
+\newif\ifcoloranglebrackets
+\coloranglebracketsfalse
+\newcommand{\coloroncondition}[1][stringcolour]{\ifcoloranglebrackets\color{#1}\fi}
+
+\lstdefinestyle{latexstyle}{%
+    language=[LaTeX]TeX,
+    keywords={subsection,subsubsection,part,chapter,paragraph}
+}
+% C++ style for listings
+% \lstdefinestyle{cppstyle}{%
+% 	language=[11]C++,   % Set language to C++ 11
+% %   === Additional Default Keywords ===
+%     morekeywords={% For some odd reason, these keywords are not included in the default C++ 11 keyword list
+%         final,%
+%         override,%
+%     },
+% %   === Additional Types ===
+%     keywordstyle={[2]\color{keywordcolour}}, % [2] generates a second keyword style group
+%     morekeywords={[2]%
+% %       === cstdint (stdint.h) ===
+%         intmax_t,%
+%         int8_t,%
+%         int16_t,%
+%         int32_t,%
+%         int64_t,%
+%         int_least8_t,%
+%         int_least16_t,%
+%         int_least32_t,%
+%         int_least64_t,%
+%         int_fast8_t,%
+%         int_fast16_t,%
+%         int_fast32_t,%
+%         int_fast64_t,%
+%         intptr_t,%
+%         uintmax_t,%
+%         uint8_t,%
+%         uint16_t,%
+%         uint32_t,%
+%         uint64_t,%
+%         uint_least8_t,%
+%         uint_least16_t,%
+%         uint_least32_t,%
+%         uint_least64_t,%
+%         uint_fast8_t,%
+%         uint_fast16_t,%
+%         uint_fast32_t,%
+%         uint_fast64_t,%
+%         uintptr_t,%
+% %       === cstddef (stddef.h) ===
+%         ptrdiff_t,%
+%         size_t,%
+%         max_align_t,%
+%         nullptr_t
+%     },
+%     keywordstyle={[3]\color{green!70!blue}},
+% %   following code is used to colorize includes between angle brackets < >
+% %   source: https://tex.stackexchange.com/questions/409859/listings-how-to-colorize-strings-between-angle-brackets 
+%     moredelim=**[directive][\coloranglebracketstrue]\#, % directive is not documented, but only affects directives such as '#'
+%     moredelim=**[s][\coloroncondition]{<}{>} % Add a string delimiter that is colored if \coloranglebrackets is true
+% }
+
+
+% VHDL style for listings
+% \lstdefinestyle{vhdlstyle}{%
+%     language=VHDL,  % Set language to VHDL
+%     % upquote=false,  % TODO: Check if this is needed
+%     keywordstyle={[2]\color{orange}},
+% %   === Additional Types ===
+%     morekeywords={[2],%
+%         bit,%
+%         bit_vector,%
+%         boolean,%
+%         integer,%
+%         string,%
+%         std_logic,%
+%         std_logic_vector,%
+%         std_ulogic,%
+%         std_ulogic_vector,%
+%         time,%
+%         unsigned,%
+%         signed,%
+%         natural,%
+%         note,%
+%         warning,%
+%         error,%
+%         failure%
+%     },
+% %   === Additional Default Functions ===
+%     keywordstyle={[3]\color{blue!80!black}},
+%     morekeywords={[3],%
+%         rising_edge,%
+%         falling_edge,%
+%         ceil,%
+%         floor,%
+%         log2,%
+%         to_integer,%
+%         to_unsigned,%
+%         to_signed,%
+%         to_bit,%
+%         to_bitvector,%
+%         to_stdlogic,%
+%         to_stdulogic,%
+%         to_stdlogicvector,%
+%         to_stdulogicvector,%
+%         resize,%
+%         real,%
+%     },
+% %   === Additional String Delimiter ' ===
+%     morestring=[m]',
+% }
+
+\lstset{
+    style=basestyle,    % base style for listings (styles are cumulative)
+    style=latexstyle,
+    % style=cppstyle,     % C++ style for listings (builds on top of base style)
+    % style=vhdlstyle,    % VHDL style for listings (builds on top of base style)
+}
 
 \begin{document}
     \begin{frame}
@@ -31,14 +219,298 @@
 
     \end{frame}
 
-    \section{History}
+    \section{What even is \LaTeX{}?}
     \begin{frame}
+        \frametitle{A Short History of \LaTeX{}}
+        \begin{columns}
+            \vspace{-\abovedisplayskip}
+            \begin{column}<1->{.52\textwidth}
+                \begin{figure} 
+                    \centering
+                    \begin{tikzpicture}[%
+                        scale = 0.8,
+                        >={Latex}
+                    ]
+                    \tikzset{%
+                        block/.style = {%
+                        draw, thick, rectangle,
+                        minimum height = 0.8cm,
+                        minimum width = 1.6cm,
+                        rounded corners,
+                        fill = lightgray,
+                        }
+                    }
 
+                    \node<1->[block, fill=teal] (TEX) at (2.5,2) {\textrm{\TeX}};
+                    \node<2->[right] at (TEX.east) {1978};
+
+                    \node[block, color=darkgray, fill=lightgray] (CONTEXT) at (-1,.5) {\textrm{\hologo{ConTeXt}}};
+                    \node[right, color=darkgray] at (CONTEXT.east) {1996};
+
+                    \node[block] (XETEX) at (0,-2) {\textrm{\hologo{XeTeX}}};
+                    \node[left] at (XETEX.west) {2004};
+                    \node[block] (LATEX) at (2.5,-1) {\textrm{\LaTeX}};
+                    \node[left] at (LATEX.west) {1984};
+                    \node[block] (LUATEX) at (5,-2) {\textrm{\hologo{LuaTeX}}};
+                    \node[left] at (LUATEX.west) {2007};
+
+                    \draw[thick, ->] (TEX) to[out=-90, in=90] (LATEX);
+                    \draw[thick, ->] (TEX) to[out=-90, in=90] (XETEX);
+                    \draw[thick, ->] (TEX) to[out=-90, in=90] (LUATEX);
+                    \draw[thick, ->, draw=darkgray] (TEX) to[out=-90, in=90] (CONTEXT);
+
+                    \node[block, fill=blue!50!white] (XELATEX) at (1,-4) {\textrm{\hologo{XeLaTeX}}};
+                    \node[block, fill=blue!50!white] (LUALATEX) at (4,-4) {\textrm{\hologo{LuaLaTeX}}};
+
+                    \draw[thick, ->] (XETEX) to[out=-90, in=90] (XELATEX);
+                    \draw[thick, ->] (LATEX) to[out=-90, in=90] (XELATEX);
+
+                    \draw[thick, ->] (LUATEX) to[out=-90, in=90] (LUALATEX);
+                    \draw[thick, ->] (LATEX) to[out=-90, in=90] (LUALATEX);
+
+                    \end{tikzpicture}
+                \end{figure}
+                % \begin{block}{\LaTeX{}}
+                %     \begin{itemize}
+                %         \item<+-> Based on \TeX{} (1978)
+                %         \item<+-> Initial \LaTeX{} release: 1984
+                %         \item<+-> 
+                %     \end{itemize}
+                % \end{block}
+            \end{column}
+            \begin{column}<2->{.48\textwidth}
+                
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{What even is \LaTeX{}?}
+        \framesubtitle<3->{And why should \textit{you} use it?}
+        \begin{columns}
+        \begin{column}{.47\textwidth}
+        \action<2->{It's a typesetting language!}
+        \begin{itemize}
+            \item Markdown
+            \item Word
+            \item Adobe Indesign
+            \item Affinity Publisher
+            \note[item]{%
+                In the world of typesetting there are two types of editors:
+                Appearance before structure:
+                 - Adobe Illustrator
+                 - Affinity Designer
+                 - Inkscape
+                Structure before appearance:
+                 - Markdown
+                 - LaTeX
+                 - Typst
+                Stuff inbetween (worse at both): 
+                 - Word
+                 - Pages
+            }
+        \end{itemize}
+        \end{column}
+        \begin{column}{.52\textwidth}
+        \action<3->{%
+        \begin{tikzpicture}
+        \begin{axis}[
+            smooth, samples = 100,
+            axis lines = left,
+            axis line style = { thick },
+            width = \textwidth,
+            height = 6cm,
+            grid style = dashed,
+            xlabel = Complexity,
+            ylabel = Difficulty,
+            x label style={at={(axis description cs:1,.1)},anchor=east},
+            ytick = \empty,
+            xtick = {2, 4, 6, 11, 13, 16, 20, 22},
+            xticklabels = {Text, Figures, Tables, Math, Plots, {Technical\\ Report}, Thesis, Book},
+            xticklabel style = {align = center},
+            x tick label style = { rotate = 70, anchor = east, font=\footnotesize },
+            legend style = { legend pos = north west },
+            no markers, domain = 0:25,
+        ]
+            \plot[very thick, teal, domain=0:14]{exp(x/3 - 2.5)};
+            \addlegendentry{Word}
+            \plot[very thick, blue]{3/(1 + exp(-2*(x-2.5))) + x/50*exp((x-4)/12)};
+            \addlegendentry{\textrm{\LaTeX}}
+        \end{axis}
+        \end{tikzpicture}}
+        \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Let's Set Ourselves a Goal}
+        A Simple Document With\ldots
+        \begin{itemize}
+            \item<+-> \ldots Sections
+            \item<+-> \ldots Text
+            \item<+-> \ldots Text Styling (\textbf{Bold}, \textit{Italic}, \underline{Underlined})
+            \item<+-> \ldots Math
+            \item<+-> \ldots Graphics / Images
+            \item<+-> \ldots Title page
+        \end{itemize}
     \end{frame}
 
     \section{Basics}
     \begin{frame}
+        \frametitle{Prerequisites}
+        \begin{itemize}
+            \item Install a \LaTeX{} distribution
+            \begin{itemize}
+                \item \TeX{} Live % https://tug.org/texlive/
+                \item \hologo{MiKTeX}
+                \item Mac\TeX{}
+            \end{itemize}
+            \item Or use Overleaf (account required!)
+            \item Basic Syntax knowledge
+        \end{itemize}
+    \end{frame}
+    \begin{frame}
+        \frametitle{Syntax Basics}
+        \begin{columns}
+            \begin{column}{.51\textwidth}
+                \begin{itemize}
+                    \item<+-> Macros / Commands\\
+                    \action<+->{\lstinline[keywords={macroName}]|\\macroName\{argument\}|\\}
+                    \action<+->{\lstinline[keywords={macroName}]|\\macroName[optional]\{argument\}|}
+                    \item<+-> Environments\\
+                    \action<+->{%
+                    \lstinline|\\begin\{environmentName\}|\\
+                    \lstinline|...|\\
+                    \lstinline|\\end\{environmentName\}|}
+                \end{itemize}
+            \end{column}
+            \begin{column}{.48\textwidth}
+                \begin{itemize}
+                    \item<+-> Special/Reserved Characters\\
+                    \begin{tabular}{*{8}{>{\ttfamily}c}}
+                        \char`\_ & \$ & \% & \& & \char`\\ &\# & \char`\{ & \char`\} \\
+                    \end{tabular}
+                \end{itemize}
+            \end{column}
+        \end{columns}
+    \end{frame}
+    \begin{frame}
+        \frametitle{Document Setup}
+        \begin{columns}
+            \begin{column}{.57\textwidth}
+                \lstinputlisting{listings/bare-minimum.tex}
+            \end{column}
+            \begin{column}{.42\textwidth}
+                \centering
+                \includegraphics<2->[width=4.5cm, frame]{listings/bare-minimum.pdf}                
+            \end{column}
+        \end{columns}
+    \end{frame}
+    \begin{frame}
+        \frametitle{Document Setup}
+        \framesubtitle{Explanation}
+        \action<1->{\lstinputlisting[linewidth=.57\textwidth, frame={trl},linerange={1-1}]{listings/bare-minimum.tex}}
+        \begin{itemize}
+            \item<1-> Tell \LaTeX{} we want to use the \texttt{article} class for this document
+            \item<1-> \texttt{article} has some options e.g.: \texttt{a4paper}, \texttt{12pt}
+        \end{itemize}
+        \action<2->{\lstinputlisting[linewidth=.57\textwidth, frame={brl},firstnumber={3},linerange={3-5}]{listings/bare-minimum.tex}}
+        \begin{itemize}
+            \item<2-> The \texttt{document} environment containing content
+        \end{itemize}
+    \end{frame}
 
+    \begin{frame}
+        \frametitle{Expanding our Document}
+        \centering \LARGE We need to learn some new macros!
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Sections}
+        \framesubtitle{Macros}
+        % TODO: remove following "heading" and replace itemize with tabular
+        Sectioning macros
+        \begin{itemize}
+            \item \lstinline|\\chapter\{\}|
+            \item \lstinline|\\part\{\}|
+            \item \lstinline|\\section\{\}|
+            \item \lstinline|\\subsection\{\}|
+            \item \lstinline|\\subsubsection\{\}|
+            \item \lstinline|\\paragraph\{\}|
+        \end{itemize}
+        % \begin{columns}
+        %     \begin{column}{.57\textwidth}
+        %         \only<1>{\lstinputlisting[linerange={1-3,5-6}]{listings/sections.tex}}
+        %         \only<2->{\lstinputlisting{listings/sections.tex}}
+        %     \end{column}
+        %     \begin{column}{.42\textwidth}
+        %         \centering
+        %         \includegraphics<3->[width=4.5cm, frame]{listings/sections.pdf}   
+        %     \end{column}
+        % \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Sections}
+        \framesubtitle{Usage} % NOTE: or utilization?
+        \begin{columns}
+            \begin{column}{.57\textwidth}
+                \only<1>{\lstinputlisting[linerange={1-3,5-6}]{listings/sections.tex}}
+                \only<2->{\lstinputlisting{listings/sections.tex}}
+            \end{column}
+            \begin{column}{.42\textwidth}
+                \centering
+                \includegraphics<3->[width=4.5cm, frame]{listings/sections.pdf}   
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Styling Text}
+        \framesubtitle{Macros}
+        % TODO: tabular with various text styles (macro, example(, description))
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Styling Text}
+        \framesubtitle{Usage}
+        % \framesubtitle{\textbf{Bold}, \textit{Italic}, \underline{underlined}, \textsc{SmallCaps}}
+        \begin{columns}
+            \begin{column}{.57\textwidth}
+                \only<1>{\lstinputlisting[linerange={1-5,10}]{listings/text-styling.tex}}
+                \only<2->{\lstinputlisting{listings/text-styling.tex}}
+            \end{column}
+            \begin{column}{.42\textwidth}
+                \centering
+                \includegraphics<3->[%
+                    width=0.95\textwidth,
+                    frame,
+                    clip=true,
+                    trim=3cm 23cm 3cm 4cm
+                ]{listings/text-styling.pdf}   
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Math}
+        \framesubtitle{Syntax}
+        % TODO: insert tabular with math syntax + explanation
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Math}
+        \framesubtitle{Usage}
+        % TODO: insert tabular with math syntax + explanation
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Document Setup}
+        \framesubtitle{Explanation}
+        But what about this empty line?
+        \lstinputlisting[linewidth=.57\textwidth, frame={rl},showlines=true,firstnumber=2,linerange={2-2}]{listings/bare-minimum.tex}
+        \action<2->{This is the preamble}
     \end{frame}
 
     \section{More in-depth}
