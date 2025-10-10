@@ -1,0 +1,27 @@
+\begin{frame}
+    \frametitle{Styling Text}
+    \framesubtitle{Macros}
+    % TODO: tabular with various text styles (macro, example(, description))
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Styling Text}
+    \framesubtitle{Usage}
+    % \framesubtitle{\textbf{Bold}, \textit{Italic}, \underline{underlined}, \textsc{SmallCaps}}
+    \begin{columns}
+        \begin{column}{.57\textwidth}
+            \only<1>{\lstinputlisting[linerange={1-5,10}]{listings/text-styling.tex}}
+            \only<2->{\lstinputlisting{listings/text-styling.tex}}
+        \end{column}
+        \begin{column}{.42\textwidth}
+            \centering
+            \includegraphics<3->[%
+                width=0.95\textwidth,
+                frame,
+                clip=true,
+                trim=3cm 23cm 3cm 4cm
+            ]{listings/text-styling.pdf}   
+        \end{column}
+    \end{columns}
+\end{frame}

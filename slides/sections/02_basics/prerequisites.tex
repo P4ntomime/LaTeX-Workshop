@@ -1,0 +1,38 @@
+\begin{frame}
+    \frametitle{Prerequisites}
+    \begin{itemize}
+        \item Install a \LaTeX{} distribution
+        \begin{itemize}
+            \item \TeX{} Live % https://tug.org/texlive/
+            \item \hologo{MiKTeX}
+            \item Mac\TeX{}
+        \end{itemize}
+        \item Or use Overleaf (account required!)
+        \item Basic Syntax knowledge
+    \end{itemize}
+\end{frame}
+\begin{frame}
+    \frametitle{Syntax Basics}
+    \begin{columns}
+        \begin{column}{.51\textwidth}
+            \begin{itemize}
+                \item<+-> Macros / Commands\\
+                \action<+->{\lstinline[keywords={macroName}]|\\macroName\{argument\}|\\}
+                \action<+->{\lstinline[keywords={macroName}]|\\macroName[optional]\{argument\}|}
+                \item<+-> Environments\\
+                \action<+->{%
+                \lstinline|\\begin\{environmentName\}|\\
+                \lstinline|...|\\
+                \lstinline|\\end\{environmentName\}|}
+            \end{itemize}
+        \end{column}
+        \begin{column}{.48\textwidth}
+            \begin{itemize}
+                \item<+-> Special/Reserved Characters\\
+                \begin{tabular}{*{8}{>{\ttfamily}c}}
+                    \char`\_ & \$ & \% & \& & \bslash &\# & \bropen & \brclose \\
+                \end{tabular}
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}

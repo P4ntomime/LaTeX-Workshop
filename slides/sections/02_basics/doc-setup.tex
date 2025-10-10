@@ -1,0 +1,30 @@
+\begin{frame}
+    \frametitle{Document Setup}
+    \begin{columns}
+        \begin{column}{.57\textwidth}
+            \lstinputlisting{listings/bare-minimum.tex}
+        \end{column}
+        \begin{column}{.42\textwidth}
+            \centering
+            \includegraphics<2->[width=4.5cm, frame]{listings/bare-minimum.pdf}                
+        \end{column}
+    \end{columns}
+\end{frame}
+\begin{frame}
+    \frametitle{Document Setup}
+    \framesubtitle{Explanation}
+    \action<1->{\lstinputlisting[linewidth=.57\textwidth, frame={trl},linerange={1-1}]{listings/bare-minimum.tex}}
+    \begin{itemize}
+        \item<1-> Tell \LaTeX{} we want to use the \texttt{article} class for this document
+        \item<1-> \texttt{article} has some options e.g.: \texttt{a4paper}, \texttt{12pt}
+    \end{itemize}
+    \action<2->{\lstinputlisting[linewidth=.57\textwidth, frame={brl},firstnumber={3},linerange={3-5}]{listings/bare-minimum.tex}}
+    \begin{itemize}
+        \item<2-> The \texttt{document} environment containing content
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Expanding our Document}
+    \centering \LARGE We need to learn some new macros!
+\end{frame}

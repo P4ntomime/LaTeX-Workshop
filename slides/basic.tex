@@ -8,7 +8,8 @@
 \date{\the\year}
 \institute[OST]{Ostschweizer Fachhochschule}
 
-\usepackage{noto}
+\usepackage{notomath}
+% \usepackage{noto}
 
 % \usetheme{Warsaw}
 % \usetheme{Marburg}
@@ -45,6 +46,8 @@
 \usepackage{graphicx}               % include graphics
 \usepackage[export]{adjustbox}
 
+\usepackage{multirow}
+\usepackage{booktabs}               % thick and thin lines in tables
 \usepackage{listings}
 % colors for listings (code)
 \definecolor{backcolour}{HTML}{f5f5f0} % background color for highlighted text
@@ -209,309 +212,18 @@
     % style=vhdlstyle,    % VHDL style for listings (builds on top of base style)
 }
 
+\newcommand{\bslash}{\char`\\}
+\newcommand{\bropen}{\char`\{}
+\newcommand{\brclose}{\char`\}}
+
 \begin{document}
-    \begin{frame}
-        \titlepage
-    \end{frame}
+    \input{sections/titlepage.tex}
     
-    \section{Introduction}
-    \begin{frame}
+    \input{sections/00_introduction/_introduction.tex}
 
-    \end{frame}
+    \input{sections/01_about-latex/_about-latex.tex}
 
-    \section{What even is \LaTeX{}?}
-    \begin{frame}
-        \frametitle{A Short History of \LaTeX{}}
-        \begin{columns}
-            \vspace{-\abovedisplayskip}
-            \begin{column}<1->{.52\textwidth}
-                \begin{figure} 
-                    \centering
-                    \begin{tikzpicture}[%
-                        scale = 0.8,
-                        >={Latex}
-                    ]
-                    \tikzset{%
-                        block/.style = {%
-                        draw, thick, rectangle,
-                        minimum height = 0.8cm,
-                        minimum width = 1.6cm,
-                        rounded corners,
-                        fill = lightgray,
-                        }
-                    }
-
-                    \node<1->[block, fill=teal] (TEX) at (2.5,2) {\textrm{\TeX}};
-                    \node<2->[right] at (TEX.east) {1978};
-
-                    \node[block, color=darkgray, fill=lightgray] (CONTEXT) at (-1,.5) {\textrm{\hologo{ConTeXt}}};
-                    \node[right, color=darkgray] at (CONTEXT.east) {1996};
-
-                    \node[block] (XETEX) at (0,-2) {\textrm{\hologo{XeTeX}}};
-                    \node[left] at (XETEX.west) {2004};
-                    \node[block] (LATEX) at (2.5,-1) {\textrm{\LaTeX}};
-                    \node[left] at (LATEX.west) {1984};
-                    \node[block] (LUATEX) at (5,-2) {\textrm{\hologo{LuaTeX}}};
-                    \node[left] at (LUATEX.west) {2007};
-
-                    \draw[thick, ->] (TEX) to[out=-90, in=90] (LATEX);
-                    \draw[thick, ->] (TEX) to[out=-90, in=90] (XETEX);
-                    \draw[thick, ->] (TEX) to[out=-90, in=90] (LUATEX);
-                    \draw[thick, ->, draw=darkgray] (TEX) to[out=-90, in=90] (CONTEXT);
-
-                    \node[block, fill=blue!50!white] (XELATEX) at (1,-4) {\textrm{\hologo{XeLaTeX}}};
-                    \node[block, fill=blue!50!white] (LUALATEX) at (4,-4) {\textrm{\hologo{LuaLaTeX}}};
-
-                    \draw[thick, ->] (XETEX) to[out=-90, in=90] (XELATEX);
-                    \draw[thick, ->] (LATEX) to[out=-90, in=90] (XELATEX);
-
-                    \draw[thick, ->] (LUATEX) to[out=-90, in=90] (LUALATEX);
-                    \draw[thick, ->] (LATEX) to[out=-90, in=90] (LUALATEX);
-
-                    \end{tikzpicture}
-                \end{figure}
-                % \begin{block}{\LaTeX{}}
-                %     \begin{itemize}
-                %         \item<+-> Based on \TeX{} (1978)
-                %         \item<+-> Initial \LaTeX{} release: 1984
-                %         \item<+-> 
-                %     \end{itemize}
-                % \end{block}
-            \end{column}
-            \begin{column}<2->{.48\textwidth}
-                
-            \end{column}
-        \end{columns}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{What even is \LaTeX{}?}
-        \framesubtitle<3->{And why should \textit{you} use it?}
-        \begin{columns}
-        \begin{column}{.47\textwidth}
-        \action<2->{It's a typesetting language!}
-        \begin{itemize}
-            \item Markdown
-            \item Word
-            \item Adobe Indesign
-            \item Affinity Publisher
-            \note[item]{%
-                In the world of typesetting there are two types of editors:
-                Appearance before structure:
-                 - Adobe Illustrator
-                 - Affinity Designer
-                 - Inkscape
-                Structure before appearance:
-                 - Markdown
-                 - LaTeX
-                 - Typst
-                Stuff inbetween (worse at both): 
-                 - Word
-                 - Pages
-            }
-        \end{itemize}
-        \end{column}
-        \begin{column}{.52\textwidth}
-        \action<3->{%
-        \begin{tikzpicture}
-        \begin{axis}[
-            smooth, samples = 100,
-            axis lines = left,
-            axis line style = { thick },
-            width = \textwidth,
-            height = 6cm,
-            grid style = dashed,
-            xlabel = Complexity,
-            ylabel = Difficulty,
-            x label style={at={(axis description cs:1,.1)},anchor=east},
-            ytick = \empty,
-            xtick = {2, 4, 6, 11, 13, 16, 20, 22},
-            xticklabels = {Text, Figures, Tables, Math, Plots, {Technical\\ Report}, Thesis, Book},
-            xticklabel style = {align = center},
-            x tick label style = { rotate = 70, anchor = east, font=\footnotesize },
-            legend style = { legend pos = north west },
-            no markers, domain = 0:25,
-        ]
-            \plot[very thick, teal, domain=0:14]{exp(x/3 - 2.5)};
-            \addlegendentry{Word}
-            \plot[very thick, blue]{3/(1 + exp(-2*(x-2.5))) + x/50*exp((x-4)/12)};
-            \addlegendentry{\textrm{\LaTeX}}
-        \end{axis}
-        \end{tikzpicture}}
-        \end{column}
-        \end{columns}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Let's Set Ourselves a Goal}
-        A Simple Document With\ldots
-        \begin{itemize}
-            \item<+-> \ldots Sections
-            \item<+-> \ldots Text
-            \item<+-> \ldots Text Styling (\textbf{Bold}, \textit{Italic}, \underline{Underlined})
-            \item<+-> \ldots Math
-            \item<+-> \ldots Graphics / Images
-            \item<+-> \ldots Title page
-        \end{itemize}
-    \end{frame}
-
-    \section{Basics}
-    \begin{frame}
-        \frametitle{Prerequisites}
-        \begin{itemize}
-            \item Install a \LaTeX{} distribution
-            \begin{itemize}
-                \item \TeX{} Live % https://tug.org/texlive/
-                \item \hologo{MiKTeX}
-                \item Mac\TeX{}
-            \end{itemize}
-            \item Or use Overleaf (account required!)
-            \item Basic Syntax knowledge
-        \end{itemize}
-    \end{frame}
-    \begin{frame}
-        \frametitle{Syntax Basics}
-        \begin{columns}
-            \begin{column}{.51\textwidth}
-                \begin{itemize}
-                    \item<+-> Macros / Commands\\
-                    \action<+->{\lstinline[keywords={macroName}]|\\macroName\{argument\}|\\}
-                    \action<+->{\lstinline[keywords={macroName}]|\\macroName[optional]\{argument\}|}
-                    \item<+-> Environments\\
-                    \action<+->{%
-                    \lstinline|\\begin\{environmentName\}|\\
-                    \lstinline|...|\\
-                    \lstinline|\\end\{environmentName\}|}
-                \end{itemize}
-            \end{column}
-            \begin{column}{.48\textwidth}
-                \begin{itemize}
-                    \item<+-> Special/Reserved Characters\\
-                    \begin{tabular}{*{8}{>{\ttfamily}c}}
-                        \char`\_ & \$ & \% & \& & \char`\\ &\# & \char`\{ & \char`\} \\
-                    \end{tabular}
-                \end{itemize}
-            \end{column}
-        \end{columns}
-    \end{frame}
-    \begin{frame}
-        \frametitle{Document Setup}
-        \begin{columns}
-            \begin{column}{.57\textwidth}
-                \lstinputlisting{listings/bare-minimum.tex}
-            \end{column}
-            \begin{column}{.42\textwidth}
-                \centering
-                \includegraphics<2->[width=4.5cm, frame]{listings/bare-minimum.pdf}                
-            \end{column}
-        \end{columns}
-    \end{frame}
-    \begin{frame}
-        \frametitle{Document Setup}
-        \framesubtitle{Explanation}
-        \action<1->{\lstinputlisting[linewidth=.57\textwidth, frame={trl},linerange={1-1}]{listings/bare-minimum.tex}}
-        \begin{itemize}
-            \item<1-> Tell \LaTeX{} we want to use the \texttt{article} class for this document
-            \item<1-> \texttt{article} has some options e.g.: \texttt{a4paper}, \texttt{12pt}
-        \end{itemize}
-        \action<2->{\lstinputlisting[linewidth=.57\textwidth, frame={brl},firstnumber={3},linerange={3-5}]{listings/bare-minimum.tex}}
-        \begin{itemize}
-            \item<2-> The \texttt{document} environment containing content
-        \end{itemize}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Expanding our Document}
-        \centering \LARGE We need to learn some new macros!
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Sections}
-        \framesubtitle{Macros}
-        % TODO: remove following "heading" and replace itemize with tabular
-        Sectioning macros
-        \begin{itemize}
-            \item \lstinline|\\chapter\{\}|
-            \item \lstinline|\\part\{\}|
-            \item \lstinline|\\section\{\}|
-            \item \lstinline|\\subsection\{\}|
-            \item \lstinline|\\subsubsection\{\}|
-            \item \lstinline|\\paragraph\{\}|
-        \end{itemize}
-        % \begin{columns}
-        %     \begin{column}{.57\textwidth}
-        %         \only<1>{\lstinputlisting[linerange={1-3,5-6}]{listings/sections.tex}}
-        %         \only<2->{\lstinputlisting{listings/sections.tex}}
-        %     \end{column}
-        %     \begin{column}{.42\textwidth}
-        %         \centering
-        %         \includegraphics<3->[width=4.5cm, frame]{listings/sections.pdf}   
-        %     \end{column}
-        % \end{columns}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Sections}
-        \framesubtitle{Usage} % NOTE: or utilization?
-        \begin{columns}
-            \begin{column}{.57\textwidth}
-                \only<1>{\lstinputlisting[linerange={1-3,5-6}]{listings/sections.tex}}
-                \only<2->{\lstinputlisting{listings/sections.tex}}
-            \end{column}
-            \begin{column}{.42\textwidth}
-                \centering
-                \includegraphics<3->[width=4.5cm, frame]{listings/sections.pdf}   
-            \end{column}
-        \end{columns}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Styling Text}
-        \framesubtitle{Macros}
-        % TODO: tabular with various text styles (macro, example(, description))
-
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Styling Text}
-        \framesubtitle{Usage}
-        % \framesubtitle{\textbf{Bold}, \textit{Italic}, \underline{underlined}, \textsc{SmallCaps}}
-        \begin{columns}
-            \begin{column}{.57\textwidth}
-                \only<1>{\lstinputlisting[linerange={1-5,10}]{listings/text-styling.tex}}
-                \only<2->{\lstinputlisting{listings/text-styling.tex}}
-            \end{column}
-            \begin{column}{.42\textwidth}
-                \centering
-                \includegraphics<3->[%
-                    width=0.95\textwidth,
-                    frame,
-                    clip=true,
-                    trim=3cm 23cm 3cm 4cm
-                ]{listings/text-styling.pdf}   
-            \end{column}
-        \end{columns}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Math}
-        \framesubtitle{Syntax}
-        % TODO: insert tabular with math syntax + explanation
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Math}
-        \framesubtitle{Usage}
-        % TODO: insert tabular with math syntax + explanation
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Document Setup}
-        \framesubtitle{Explanation}
-        But what about this empty line?
-        \lstinputlisting[linewidth=.57\textwidth, frame={rl},showlines=true,firstnumber=2,linerange={2-2}]{listings/bare-minimum.tex}
-        \action<2->{This is the preamble}
-    \end{frame}
+    \input{sections/02_basics/_basics.tex}
 
     \section{More in-depth}
     \begin{frame}
