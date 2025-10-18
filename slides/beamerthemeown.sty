@@ -10,7 +10,8 @@
 \mode<presentation>
 
 \useoutertheme[subsection=false]{miniframes}
-\useinnertheme[shadow=true]{rounded}
+% we use tcolorbox theme here to disable transition shading of box title
+\useinnertheme[rounded=true, shadow=false, shaded=false]{tcolorbox}
 \usecolortheme{own}
 
 \setbeamerfont{block title}{size={}}
@@ -18,5 +19,11 @@
 
 \usefonttheme{serif}
 
+\newcommand{\blockstrut}{\rule[-.25em]{0pt}{1.15em}}
+
+\theoremstyle{definition}
+\newtheorem{defblock}[theorem]{\blockstrut Definition}
+\theoremstyle{example}
+\newtheorem{exblock}[theorem]{\blockstrut Example}
 \mode
 <all>

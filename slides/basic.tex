@@ -43,12 +43,15 @@
 
 \usepackage{hologo}
 
+% \usepackage{tabu}
+\usepackage[table]{xcolor}
 \usepackage{graphicx}               % include graphics
 \usepackage[export]{adjustbox}
 
 \usepackage{multirow}
 \usepackage{booktabs}               % thick and thin lines in tables
 \usepackage{listings}
+\usepackage{tcolorbox}
 % colors for listings (code)
 \definecolor{backcolour}{HTML}{f5f5f0} % background color for highlighted text
 \definecolor{commentcolour}{HTML}{6a9955}
@@ -212,9 +215,53 @@
     % style=vhdlstyle,    % VHDL style for listings (builds on top of base style)
 }
 
+% inline tikz node for later referencing
+\newcommand{\tn}[2]{% from https://tex.stackexchange.com/a/402466/121799
+    \ifmmode%
+    \tikz[remember picture,baseline= (#1.base),inner sep=0pt]{%
+        \node(#1){$#2$};
+    }%
+    \else%
+    \tikz[remember picture,baseline= (#1.base),inner sep=0pt]{%
+        \node(#1){#2};%
+        % \draw (#1.south west) to ++(0,-2mm) -| (#1.south east) -- (#1.south east);
+    }%
+    \fi%
+}
+
+\newcommand{\lstkw}[1]{\textcolor{keywordcolour}{\textbf{\texttt{#1}}}}
+
 \newcommand{\bslash}{\char`\\}
 \newcommand{\bropen}{\char`\{}
 \newcommand{\brclose}{\char`\}}
+
+\makeatletter
+\newcommand{\glyphdp}[1]{%
+\newbox\meas@bx%
+\setbox\meas@bx=\hbox{#1}%
+\the\dp\meas@bx%
+}
+
+\newcommand{\glyphht}[1]{%
+\newbox\meas@bx%
+\setbox\meas@bx=\hbox{#1}%
+\the\ht\meas@bx%
+}
+\makeatother
+
+% \newtheorem{defblock}{\normalfont Definition}
+% \setbeamertemplate{theorems}[normal] % ensures upright text like Beamer defaults
+
+
+% \tcbuselibrary{theorems}
+% \newtcbtheorem[number within=section]{defblock}{Definition}%
+% {enhanced,
+%  colback=blue!5,
+%  colframe=blue!50!black,
+%  fonttitle=\bfseries,
+%  coltitle=black,
+%  sharp corners}{df}
+
 
 \begin{document}
     \input{sections/titlepage.tex}

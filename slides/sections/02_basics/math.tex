@@ -2,24 +2,29 @@
     \frametitle{Math}
     \framesubtitle{Syntax}
     \begin{center}
-    \begin{tabular}{cl}
-    \pause
-        \textbf{Symbol(s)}
-            & \textbf{Description}\\
-    \toprule
-        \lstinline|\\$...\\$| 
+    \usebeamercolor{block title}
+    \begin{tabular}{ccl}
+    \rowcolor{bg}\color{fg}\textbf{Environment}\rule{0pt}{1.3em}
+            & \color{fg}\textbf{Symbol(s)}
+            & \color{fg}\textbf{Description}\\
+        \lstinline|math|
+            & \lstinline|$...$| 
             & Inline math delimiters \pause\\
     \midrule
-        \lstinline|\\[...\\]|
+        \lstinline|displaymath|
+            & \lstinline|\\[...\\]|
             & Display math delimiters \pause\\
     \midrule
-        \lstinline|_\{...\}|
+        
+            & \lstinline|_\{...\}|
             & Subscript \pause\\
     \midrule
-        \lstinline|^\{...\}|
+        
+            & \lstinline|^\{...\}|
             & Superscript \pause\\
     \midrule
-        \lstinline|\\left(...\\right)|
+        
+            & \lstinline|\\left(...\\right)|
             & Auto-scaling braces\\
     \end{tabular}
     \end{center}
@@ -29,10 +34,10 @@
     \frametitle{Math}
     \framesubtitle{Syntax -- Examples}
     \begin{columns}
-        \begin{column}{.53\textwidth}
+        \begin{column}{.54\textwidth}
             \lstinputlisting{listings/math.tex}
         \end{column}
-        \begin{column}{.45\textwidth}
+        \begin{column}{.44\textwidth}
             \input{listings/math.tex}
         \end{column}
     \end{columns}
