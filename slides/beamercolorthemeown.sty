@@ -18,28 +18,30 @@
 
 
 \setbeamercolor*{palette primary}{use=structure,fg=white,bg=structure.fg}
-\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=structure.fg!75!black}
+\definecolor{psecbg}{HTML}{C51D3E}
+\setbeamercolor{palette secondary}{use=structure,fg=white,bg=psecbg}
 \setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=structure.fg!10!black}
-\setbeamercolor*{palette quaternary}{fg=white,bg=black}
+\definecolor{pquatbg}{HTML}{746BD2}
+\setbeamercolor{palette quaternary}{fg=white,bg=pquatbg}
 
-\setbeamercolor*{sidebar}{use=structure,bg=structure.fg}
+% \setbeamercolor*{sidebar}{use=structure,bg=structure.fg}
   
-\setbeamercolor*{palette sidebar primary}{use=structure,fg=structure.fg!10}
-\setbeamercolor*{palette sidebar secondary}{fg=white}
-\setbeamercolor*{palette sidebar tertiary}{use=structure,fg=structure.fg!50}
-\setbeamercolor*{palette sidebar quaternary}{fg=white}
+% \setbeamercolor*{palette sidebar primary}{use=structure,fg=structure.fg!10}
+% \setbeamercolor*{palette sidebar secondary}{fg=white}
+% \setbeamercolor*{palette sidebar tertiary}{use=structure,fg=structure.fg!50}
+% \setbeamercolor*{palette sidebar quaternary}{fg=white}
 
 \setbeamercolor*{titlelike}{parent=palette primary}
 
 \setbeamercolor*{separation line}{}
 \setbeamercolor*{fine separation line}{}
 
-\setbeamercolor*{alerted text}{parent=structure}
-\setbeamercolor*{example text}{parent=palette primary}
+\setbeamercolor*{alerted text}{parent=palette secondary}
+\setbeamercolor*{example text}{parent=palette quaternary}
 
-\setbeamercolor{block title}{use=structure,fg=white,bg=structure.fg!85!black}
-\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg!40!black}
-\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.fg!40!black}
+\setbeamercolor{block title}{parent=palette primary, use=structure}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.bg}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.bg}
 
 \setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!10!bg}
 \setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!10!bg}

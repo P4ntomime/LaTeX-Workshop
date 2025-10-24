@@ -1,39 +1,109 @@
 \begin{frame}
     \frametitle{Sections}
-    \framesubtitle{Macros}
-    % TODO: remove following "heading" and replace itemize with tabular
-    Sectioning macros
-    \begin{itemize}
-        \item \lstinline|\\chapter\{\}|
-        \item \lstinline|\\part\{\}|
-        \item \lstinline|\\section\{\}|
-        \item \lstinline|\\subsection\{\}|
-        \item \lstinline|\\subsubsection\{\}|
-        \item \lstinline|\\paragraph\{\}|
-    \end{itemize}
-    % \begin{columns}
-    %     \begin{column}{.57\textwidth}
-    %         \only<1>{\lstinputlisting[linerange={1-3,5-6}]{listings/sections.tex}}
-    %         \only<2->{\lstinputlisting{listings/sections.tex}}
-    %     \end{column}
-    %     \begin{column}{.42\textwidth}
-    %         \centering
-    %         \includegraphics<3->[width=4.5cm, frame]{listings/sections.pdf}   
-    %     \end{column}
-    % \end{columns}
+    \framesubtitle{Commands}
+    \begin{center}
+    % \usebeamercolor{block title}
+    % \begin{NiceTabular}{l c c l}%
+    %     [color-inside]
+    %     \RowStyle[nb-rows=1,rowcolor=bg,color=fg]{\bfseries}%
+    %     \tablestrut%
+    %     Command
+    %     & \Block{1-2}{Level} 
+    %     && Note\\
+    % % \hline%
+    % \tablestrut%
+    %     \lstinline|\\part\{\}|          
+    %     & 0 & \cellcolor{lightgray} -1
+    %     & \\
+    % \midrule
+    % % \cmidrule{1-2}
+    % \rowcolor{lightgray}%
+    %     \lstinline|\\chapter\{\}|       
+    %     & \Block{1-2}{0} 
+    %     && \parbox{4cm}{\itshape Only available in \texttt{book} and \texttt{report} class.}\\
+    % \midrule
+    %     \lstinline|\\section\{\}|       
+    %     & \Block{1-2}{1} 
+    %     & \\
+    % \midrule
+    %     \lstinline|\\subsection\{\}|    
+    %     & \Block{1-2}{2} 
+    %     & \\
+    % \midrule
+    %     \lstinline|\\subsubsection\{\}| 
+    %     & \Block{1-2}{3} 
+    %     & \\
+    % \midrule
+    %     \lstinline|\\paragraph\{\}|     
+    %     & \Block{1-2}{4} 
+    %     & \\
+    % \midrule
+    %     \lstinline|\\subparagraph\{\}|  
+    %     & \Block{1-2}{5} 
+    %     & \\
+    % \end{NiceTabular}
+    % \usebeamercolor{block title}
+    \begin{tabular}{l c c}
+    % \rowcolor{bg}%
+        & \multicolumn{2}{c}{%
+        % \color{fg}
+        \tablestrut\textbf{Level}}\\
+    \cline{2-3}
+    % \rowcolor{bg}
+        \multirow{-2}{*}{%
+            % \color{fg}%
+            \textbf{Command}
+        }
+        & %
+        %\color{fg}
+        \texttt{article} 
+        & %
+        %\color{fg}
+        \parbox{5em}{\centering\strut\texttt{book} /\\\texttt{report}\textsubscript{\strut}}\\
+    \toprule[1.2pt]
+    % \tablestrut%
+        \lstinline|\\part\{\}|          
+        & 0
+        & --1\\
+    \midrule%
+        \lstinline|\\chapter\{\}|       
+        & N/A & 0 \\
+    \midrule
+        \lstinline|\\section\{\}|       
+        & \multicolumn{2}{c}{1} \\
+    \midrule
+        \lstinline|\\subsection\{\}|    
+        & \multicolumn{2}{c}{2} \\
+    \midrule
+        \lstinline|\\subsubsection\{\}| 
+        & \multicolumn{2}{c}{3} \\
+    \midrule
+        \lstinline|\\paragraph\{\}|     
+        & \multicolumn{2}{c}{4} \\
+    \midrule
+        \lstinline|\\subparagraph\{\}|  
+        & \multicolumn{2}{c}{5} \\
+    \end{tabular}
+    \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{Sections}
-    \framesubtitle{Usage} % NOTE: or utilization? or example?
+    % \framesubtitle{Example}
     \begin{columns}
         \begin{column}{.57\textwidth}
-            \only<1>{\lstinputlisting[linerange={1-3,5-6}]{listings/sections.tex}}
-            \only<2->{\lstinputlisting{listings/sections.tex}}
+            \alt<1>{\tcbexinputlst[frame=none,aboveskip=0mm,linerange={1-3,5-6}]{listings/sections.tex}}%
+            {\tcbexinputlst[frame=none,aboveskip=0mm]{listings/sections.tex}}
         \end{column}
         \begin{column}{.42\textwidth}
             \centering
-            \includegraphics<3->[width=4.5cm, frame]{listings/sections.pdf}   
+            \includegraphics<3>[width=4.5cm, frame]{listings/sections.pdf}
+            \includegraphics<4->[%
+                width=\dimexpr\textwidth-.8pt\relax, 
+                frame,
+                clip=true,
+                trim=3cm 23cm 6cm 4cm
+            ]{listings/sections.pdf}
         \end{column}
     \end{columns}
 \end{frame}

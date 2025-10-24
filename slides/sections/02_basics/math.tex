@@ -2,55 +2,156 @@
     \frametitle{Math}
     \framesubtitle{Syntax}
     \begin{center}
-    \usebeamercolor{block title}
     \begin{tabular}{ccl}
-    \rowcolor{bg}\color{fg}\textbf{Environment}\rule{0pt}{1.3em}
-            & \color{fg}\textbf{Symbol(s)}
-            & \color{fg}\textbf{Description}\\
+        \textbf{Environment}
+            & \textbf{Symbol(s)}
+            & \textbf{Description}\\
+    \toprule[1.2pt]
         \lstinline|math|
             & \lstinline|$...$| 
-            & Inline math delimiters \pause\\
-    \midrule
+            & Inline math delimiters\\
+    \midrule\pause
         \lstinline|displaymath|
             & \lstinline|\\[...\\]|
-            & Display math delimiters \pause\\
-    \midrule
-        
-            & \lstinline|_\{...\}|
-            & Subscript \pause\\
-    \midrule
-        
-            & \lstinline|^\{...\}|
-            & Superscript \pause\\
-    \midrule
-        
-            & \lstinline|\\left(...\\right)|
-            & Auto-scaling braces\\
+            & Display math delimiters\\
     \end{tabular}
     \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{Math}
-    \framesubtitle{Syntax -- Examples}
+    \framesubtitle{Operator Symbols}
+    \begin{center}
+    \begin{tabular}{l c c >{\raggedright\arraybackslash}m{5cm}}
+        \textbf{Operation}
+        & \textbf{Command}
+        & \textbf{Example}
+        & \textbf{Notes}\\
+    \toprule[1.2pt]\pause
+        Addition
+        & \texttt{+}
+        & $a + b$
+        & \\
+    \midrule\pause
+        Subtraction
+        & \texttt{-}
+        & $c - d$
+        & \\
+    \midrule\pause
+        Multiplication
+        & \lstinline|\\cdot|
+        & $e \cdot f$
+        & Do \textbf{not} use \texttt{*} or \lstinline|\\times|!\\
+    \midrule\pause
+        Division
+        & \lstinline|\\frac\{\}\{\}|
+        & $\dfrac{g}{h}$ % \dfrac{}{} used here for better visualization
+        & For inline math a slash \texttt{/} is also acceptable.\\
+    \midrule\pause
+        Exponential
+        & \lstinline|^\{\}|
+        & $i^{j}$
+        & Sometimes also reffered to as \emph{superscript}.\\
+    \midrule\pause
+        Root
+        & \lstinline|\\sqrt[]\{\}|
+        & $\sqrt{k + l}$
+        & The optional parameter is for non-square roots e.g. $\sqrt[3]{m}$.\\
+    \end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Math}
+    \framesubtitle{Functions}
+    \begin{center}
+    \begin{tabular}{l c c}
+        \textbf{Function}
+        & \textbf{Command}
+        & \textbf{Example}\\
+    \toprule[1.2pt]\pause
+        Sine
+        & \lstinline|\\sin|
+        & $\sin\alpha$\\
+    \midrule\pause
+        Cosine
+        & \lstinline|\\cos|
+        & $\cos\beta$\\
+    \midrule\pause
+        Tangens
+        & \lstinline|\\tan|
+        & $\tan\gamma$\\
+    \end{tabular}
+    \end{center}
+\end{frame}
+
+% TODO: add link/reference to https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+\begin{frame}
+    \frametitle{Math}
     \begin{columns}
         \begin{column}{.54\textwidth}
-            \lstinputlisting{listings/math.tex}
+            \tcbexinputlst{listings/math-cosine-law.tex}
         \end{column}
         \begin{column}{.44\textwidth}
-            \input{listings/math.tex}
+            \input{listings/math-cosine-law.tex}
         \end{column}
     \end{columns}
 \end{frame}
 
 \begin{frame}
     \frametitle{Math}
-    \framesubtitle{Operators}
-    % TODO: insert tabular with math syntax + explanation
+    \begin{columns}
+        \begin{column}{.54\textwidth}
+            \tcbexinputlst{listings/math-sine-law.tex}
+        \end{column}
+        \begin{column}{.44\textwidth}
+            \input{listings/math-sine-law.tex}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}
     \frametitle{Math}
-    \framesubtitle{Usage}
-    % TODO: insert tabular with math syntax + explanation
+    \framesubtitle{More functions}
+    \begin{center}
+    \begin{tabular}{l c c}
+        \textbf{Function}
+        & \textbf{Command}
+        & \textbf{Example}\\
+    \toprule[1.2pt]\pause
+        Limit
+        & \lstinline|\\lim_\{\}|
+        & $\lim_{n \to \infty} \frac{1}{n}$\\
+    \midrule\pause
+        Sum
+        & \lstinline|\\sum_\{\}^\{\}|
+        & $\sum_{i = 0}^{n} a_n$\\
+    \midrule\pause
+        Product
+        & \lstinline|\\prod_\{\}^\{\}|
+        & $\prod_{j = 0}^{m}b_m$\\
+    \end{tabular}
+    \end{center}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Math}
+    \framesubtitle{Integrals and Derivatives}
+    \begin{center}
+    \begin{tabular}{l c c}
+        \textbf{Operation}
+        & \textbf{Command}
+        & \textbf{Example}\\
+    \toprule[1.2pt]\pause
+        Derivative
+        & \lstinline|\\frac\{d\}\{d x\}|
+        & $\frac{d\,f(x)}{d\, x}$\\
+    \midrule\pause
+        Integral
+        & \lstinline|\\int_\{\}^\{\}|
+        & $\int_{a}^{b} x d\,x$\\
+    \end{tabular}
+    \end{center}
+\end{frame}
+

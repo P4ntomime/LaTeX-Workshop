@@ -1,0 +1,93 @@
+\begin{frame}
+    \frametitle{Math}
+    \framesubtitle{More functions}
+    % [Speakers Notes]
+    % But wait, this looks weird!?
+    % This is because we wrote this in inline-math mode. 
+    % If we write this in the displaymath environment, 
+    % the limits will appear below and above the symbols, as we would expect.
+    % If we desire this behavior in inline math as well, 
+    % there's a fix for this: The \limits command.
+    \begin{center}
+        \Large%
+        But wait, this looks weird!?
+
+        \vfill
+        $\lim_{n \to \infty} \frac{1}{n}
+        \qquad
+        \sum_{i = 0}^{n} a_n
+        \qquad
+        \prod_{j = 0}^{m}b_m
+        \qquad
+        \int_{a}^{b} x d\,x$
+
+        \vfill
+        \only<2->{There's a fix for this!}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Math}
+    \framesubtitle{\texttt{\bslash limits} command}
+    \begin{center}
+        \Large%
+        The \lstinline|\limits| command.
+    \end{center}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{exlisting}{Example}
+A different inline sum
+$\sum\limits_{i = 0}^{n} a_n$
+is easy.
+            \end{exlisting}
+        \end{column}
+        \begin{column}{.48\textwidth}
+            \centering
+            \vspace{1em}
+            
+            A different inline sum
+            $\sum\limits_{i = 0}^{n} a_n$
+            is easy.
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Math}
+    \framesubtitle{Custom functions}
+        {\Large\lstinline|\\operatorname\{definition\}|}
+        
+        \begin{itemize}
+            \item<+-> Typesets contents as a function / an operator
+            \item<+-> Handles spacing correctly
+            \item<+-> Should only be used if function is only used once
+        \end{itemize}
+        \pause
+        
+        \vspace{1.5em}
+        {\Large\lstinline|\\DeclareMathOperator\{command\}\{definition\}|}
+        
+        \begin{itemize}
+            \item Defines new math function
+            \item Can \textbf{only} be used in the \emph{preamble}!
+        \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Math}
+    \framesubtitle{Custom functions}
+    \begin{columns}
+        \begin{column}{.6\textwidth}
+            \begin{exlisting}{Example}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+$\operatorname{arccosh}x + \arcsinh y$
+            \end{exlisting}
+        \end{column}
+        \begin{column}{.38\textwidth}
+            \centering
+            \vspace{1em}
+
+            $\operatorname{arccosh}x + \arcsinh y$
+        \end{column}
+    \end{columns}
+\end{frame}

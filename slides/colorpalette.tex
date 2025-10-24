@@ -1,0 +1,69 @@
+\newcommand{\colorshape}[1]{%
+    \tikz[%
+            every node/.style={%
+                inner sep=1pt, 
+                minimum width=8em, 
+                minimum height=1em,
+                font=\tiny
+            }
+        ]{%
+        \usebeamercolor{#1}
+        \node[draw=fg,fill=bg, text=fg] (a) {#1.bg};
+        \node[draw=bg,fill=fg, text=bg, below=0mm of a] {#1.fg};
+    }
+}
+\section{Debug}
+\begin{frame}
+    \frametitle{Text Styles}
+    \framesubtitle{This is a subtitle}
+    
+    \usebeamercolor{palette primary}
+    This is merely a test to see text, \textcolor{bg}{color} and \emph{styling}, 
+    such as \textbf{bold}, \underline{underlined}, \textsc{SmallCaps} and \textit{more}.
+
+\end{frame}
+\begin{frame}
+    \frametitle{Colors}
+
+    \colorshape{structure}
+    \colorshape{palette primary}
+    \colorshape{palette secondary}
+    \colorshape{palette tertiary}
+    \colorshape{palette quaternary}
+    \colorshape{sidebar}
+    \colorshape{palette sidebar primary}
+    \colorshape{palette sidebar secondary}
+    \colorshape{palette sidebar tertiary}
+    \colorshape{palette sidebar quaternary}
+    \colorshape{titlelike}
+    \colorshape{separation line}
+    \colorshape{fine separation line}
+    \colorshape{alerted text}
+    \colorshape{example text}
+    \colorshape{block title}
+    \colorshape{block title alerted}
+    \colorshape{block title example}
+    \colorshape{block body}
+    \colorshape{block body alerted}
+    \colorshape{block body example}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Blocks}
+
+    \begin{alertblock}{\blockstrut Alertblock}
+        Some text
+    \end{alertblock}
+
+    \begin{block}{mt}
+        Some text
+    \end{block}
+
+    \begin{exblock}
+        Some text
+    \end{exblock}
+
+    \begin{defblock}
+        Some text
+    \end{defblock}
+\end{frame}

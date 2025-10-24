@@ -1,9 +1,9 @@
 \begin{frame}
     \frametitle{Document Setup}
-    \framesubtitle{Example}
+    % \framesubtitle{Example}
     \begin{columns}
         \begin{column}{.57\textwidth}
-            \lstinputlisting{listings/bare-minimum.tex}
+            \tcbexinputlst{listings/bare-minimum.tex}
         \end{column}
         \begin{column}{.42\textwidth}
             \centering
@@ -14,12 +14,12 @@
 \begin{frame}
     \frametitle{Document Setup}
     \framesubtitle{Explanation}
-    \action<1->{\lstinputlisting[linewidth=.57\textwidth, frame={trl},linerange={1-1}]{listings/bare-minimum.tex}}
+    \action<1->{\tcbinputlst[linerange={1-1}][width=.59\textwidth, sharp corners=south]{listings/bare-minimum.tex}}
     \begin{itemize}
         \item<1-> Tell \LaTeX{} we want to use the \texttt{article} class for this document
         \item<1-> \texttt{article} has some options e.g.: \texttt{a4paper}, \texttt{12pt}
     \end{itemize}
-    \action<2->{\lstinputlisting[linewidth=.57\textwidth, frame={brl},firstnumber={3},linerange={3-5}]{listings/bare-minimum.tex}}
+    \action<2->{\tcbinputlst[firstnumber={3},linerange={3-5}][width=.59\textwidth, sharp corners=north]{listings/bare-minimum.tex}}
     \begin{itemize}
         \item<2-> The \texttt{document} environment containing content
     \end{itemize}

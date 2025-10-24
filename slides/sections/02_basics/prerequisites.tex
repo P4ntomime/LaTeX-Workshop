@@ -14,135 +14,221 @@
 
 \begin{frame}
     \frametitle{Syntax Basics}
-    \framesubtitle{Macros / Commands}
+    \framesubtitle{Commands}
+    % [Speakers Notes]
+    % Let's start with some basic syntax knowledge. 
+    % One essential component of \LaTeX{} are \emph{commands} -- or sometimes also referred to as \emph{macros}.
+    % Here's an example of a command, namely the `\section` command. 
+    % It starts with a backslash -- a reserved character, but more no that later -- which tells \LaTeX{} that the following sequence of consecutive letters shall be interpreted as a command.
+    % Those following letters are the commands name, which is then followed by a mandatory argument `{...}`. 
+    % This argument is often some content, such as text.
+    % In some cases there is also an optional argument as we see here `[...]`, 
+    % though as the name implies, we can almost always omit this. 
+    % These are the very basics of commands and we'll expand on this later on in the advanced section.
     \begin{center}
+        % TODO: swap command with optional argument as last one to appear.
         \LARGE
-        \tn{bslash}{\texttt{\bslash}}\tn{cmdname}{\textcolor{keywordcolour}{\texttt{\textbf{documentclass}}}}\tn{cmdopt}{\texttt{[a4paper,12pt]}}\tn{cmdmand}{\texttt{\bropen extarticle\brclose}}
-
-        \vspace{5em}
+        \tn{bslash}{\texttt{\bslash}}\tn{cmdname}{\textcolor{keywordcolour}{\texttt{\textbf{section}}}}\tn{cmdmand}{\texttt{\bropen A Section Heading\brclose}}
+        
+        \vspace{6em}
+        
+        \action<6->{%
+            \LARGE
+            \tn{bslash1}{\texttt{\bslash}}\tn{cmdname1}{\textcolor{keywordcolour}{\texttt{\textbf{section}}}}\tn{cmdopt}{\texttt{[A Heading]}}\tn{cmdmand1}{\texttt{\bropen A Section Heading\brclose}}
+        }
     \end{center}
     \begin{tikzpicture}[%
         remember picture,
         overlay,
         thick,
         every node/.style={%
-            text height=0.8em
+            text height=0.9em,
+            text width=7em,
+            align=center,
         }]
         \coordinate[below=0.5mm of bslash.south] (brackbase);
         \coordinate[below=2mm of bslash.south] (bracklow);
+        \coordinate[above=0.5mm of cmdopt.north] (brackbasebot);
+        \coordinate[above=2mm of cmdopt.north] (bracklowbot);
         \pause
-        \node[below=0.5cm of bslash]  (bslashtxt) {Command delimiter};
+        \node[below=7.5mm of bslash]  (bslashtxt) {Command\\ delimiter};
         \draw (brackbase-|{$(bslash.south west)+(0.5mm,0)$}) |- (bracklow-|bslash.south) -| (brackbase-|{$(bslash.south east)+(-0.5mm,0)$});
-        \draw (bracklow-|bslash.south) -- (bslashtxt);
+        \draw (bracklow-|bslash.south) -- (bslashtxt.north);
         \pause
-        \node[below=1.5cm of cmdname] (cmdnametxt) {Command name};
+        \node[right=0mm of bslashtxt] (cmdnametxt) {Command\\ name};
         \draw (brackbase-|{$(cmdname.south west)+(0.5mm,0)$}) |- (bracklow-|cmdname.south) -| (brackbase-|{$(cmdname.south east)+(-0.5mm,0)$});
-        \draw (bracklow-|cmdname.south) -- (cmdnametxt);
+        \draw (bracklow-|cmdname.south) |- ($(cmdname.south)!0.8!(cmdnametxt.north)$) -| (cmdnametxt.north);
         \pause
-        \node[below=0.5cm of cmdopt]  (cmdopttxt) {Optional argument\footnote{Can almost always be omitted.}};
-        \draw (brackbase-|{$(cmdopt.south west)+(0.5mm,0)$}) |- (bracklow-|cmdopt.south) -| (brackbase-|{$(cmdopt.south east)+(-0.5mm,0)$});
-        \draw (bracklow-|cmdopt.south) -- (cmdopttxt);
-        \pause
-        \node[below=1.5cm of cmdmand] (cmdmandtxt) {Mandatory argument};
+        \node[right=0mm of cmdnametxt]  (cmdopttxtphant) {\phantom{Optional}\\ \phantom{argument}};
+        \node[right=0mm of cmdopttxtphant] (cmdmandtxt) {Mandatory\\ argument};
         \draw (brackbase-|{$(cmdmand.south west)+(0.5mm,0)$}) |- (bracklow-|cmdmand.south) -| (brackbase-|{$(cmdmand.south east)+(-0.5mm,0)$});
-        \draw (bracklow-|cmdmand.south) -- (cmdmandtxt);
+        \draw (bracklow-|cmdmand.south) |- ($(cmdmand.south)!0.8!(cmdmandtxt.north)$) -| (cmdmandtxt.north);
+        \pause
+        \node[below=-2mm of cmdopttxtphant] (cmdopttxt) {Optional\\ argument};
+        \pause
+        \draw (brackbasebot-|{$(cmdopt.north west)+(0.5mm,0)$}) |- (bracklowbot-|cmdopt.north) -| (brackbasebot-|{$(cmdopt.north east)+(-0.5mm,0)$});
+        \draw (bracklowbot-|cmdopt.north) |- ($(cmdopt.north)!0.5!(cmdopttxt.south)$) -| (cmdopttxt.south);
     \end{tikzpicture}
 \end{frame}
 
 % NOTE: not sure if we still need the following...
-\begin{frame}
-    \frametitle{Syntax Basics}
-    \framesubtitle{Macros / Commands}
-    \begin{columns}
-        \begin{column}{.55\textwidth}
-            \begin{defblock}<1->
-                \action<+->{\lstinline[keywords={<macroName>}]|\\macroName\{<argument>\}|\\}%
-                \action<+->{\lstinline[keywords={<macroName>}]|\\macroName[<optional>]\{<argument>\}|}
-            \end{defblock}
-        \end{column}
-        \begin{column}{.44\textwidth}
-            \begin{exblock}<2->
-                yadda yadda
-            \end{exblock}
-        \end{column}
-    \end{columns}
-\end{frame}
+% \begin{frame}
+%     \frametitle{Syntax Basics}
+%     \framesubtitle{Commands}
+%     \begin{columns}
+%         \begin{column}{.55\textwidth}
+%             \begin{defblock}<1->
+%                 \action<+->{\lstinline|\\commandName\{<argument>\}|\\}%
+%                 \action<+->{\lstinline|\\commandName[<optional>]\{<argument>\}|}
+%             \end{defblock}
+%         \end{column}
+%         \begin{column}{.44\textwidth}
+%             \begin{exblock}<2->
+%                 yadda yadda
+%             \end{exblock}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
 
 % TODO: rework this, it's currently too cluttered...
 \begin{frame}
     \frametitle{Syntax Basics}
     \framesubtitle{Environments}
+    % [Speakers Notes]
+    % Next we are going to learn about environments. 
+    %
+    % Let's imagine we have some content -- i.e. some text -- that we want to center or 
+    % generally just want to format differently. 
+    % We could use a command, but once we have lots of content and different formatting, 
+    % this gets quite convoluted and impractical. So we use environments!
+    % An environment always surrounds its content with begin and end.
+    % 
+    % Here we have some content -- that ideally isn't just one line -- and we want to apply a
+    % certain set of rules to all of it. For this, we can use so-called environments, which do exactly that.
+    % For these environments there are two new commands that we need to know: `\begin{name}` and `\end{name}`.
+    % These commands are a bit special, as they always have to come in pairs.
+    % I.e. there is no `\begin{name}` without `\end{name}` and vice-versa.
+    % The `name` can be any given predefined environment name -- in this case the name is `document`.
     \begin{center}
         \LARGE
         \parbox{20ex}{%
         \raggedright
-        \tn{envbegin}{\texttt{\bslash\lstkw{begin}}\texttt{\bropen}\tn{envname1}{\texttt{document}}\texttt{\brclose}}\\%
-        \tn{envcontent}{\quad\texttt{...}}\\%
-        \tn{envend}{\texttt{\bslash\lstkw{end}}\texttt{\bropen}\tn{envname2}{\texttt{document}}\texttt{\brclose}}%
+        \onslide<2->{%
+            \tn{envbegin}{\texttt{\bslash\lstkw{begin}}\texttt{\bropen}\tn{envname1}{\alt<3->{\texttt{center}}{\phantom{\texttt{center}}}}\texttt{\brclose}}\\%
+        }
+        \tn{envcontent}{\quad\textit{Content}}\\%
+        \onslide<2->{%
+            \tn{envend}{\texttt{\bslash\lstkw{end}}\texttt{\bropen}\tn{envname2}{\alt<3->{\texttt{center}}{\phantom{\texttt{center}}}}\texttt{\brclose}}%
+        }
         }%
     \end{center}
     \begin{tikzpicture}[overlay, remember picture, thick]
-        \coordinate[above=0.5mm of envbegin.north] (topbrackbase);
-        \coordinate[above=2mm of envbegin.north] (topbrackhigh);
-        \coordinate[below=0.5mm of envname1.south] (topbrackbaselow);
-        \coordinate[below=2mm of envname1.south] (topbracklow);
-        \coordinate[below=0.5mm of envend.south] (botbrackbase);
-        \coordinate[below=2mm of envend.south] (botbracklow);
-        \coordinate[above=0.5mm of envname2.north] (botbrackbasehigh);
-        \coordinate[above=2mm of envname2.north] (botbrackhigh);
-        \pause
-        \node[left=3cm of {$(envbegin)!0.5!(envend)$}, text width=12ex, align=center]  (delimtxt) {Environment delimiters};
-        \draw (topbrackbase-|{$(envbegin.north west)+(0.5mm,0)$}) |- (topbrackhigh-|envbegin.north) -| (topbrackbase-|{$(envbegin.north east)+(-0.5mm,0)$});
-        \draw (topbrackhigh-|envbegin.north) -- ++(0,1mm) -| (delimtxt);
         
-        \draw (botbrackbase-|{$(envend.south west)+(0.5mm,0)$}) |- (botbracklow-|envend.south) -| (botbrackbase-|{$(envend.south east)+(-0.5mm,0)$});
-        \draw (botbracklow-|envend.south) -- ++(0,-1mm) -| (delimtxt);
-
-        \node[right=3cm of {$(envname1)!0.5!(envname2)$}, text width=12ex, align=center]  (nametxt) {Environment name};
-        \draw (topbrackbaselow-|{$(envname1.south west)+(0.5mm,0)$}) |- (topbracklow-|envname1.south) -| (topbrackbaselow-|{$(envname1.south east)+(-0.5mm,0)$});
-        \draw (topbracklow-|envname1.south) -- (nametxt);
-        \draw (botbrackbasehigh-|{$(envname2.north west)+(0.5mm,0)$}) |- (botbrackhigh-|envname2.north) -| (botbrackbasehigh-|{$(envname2.north east)+(-0.5mm,0)$});
-        \draw (botbrackhigh-|envname2.north) -- (nametxt);
     \end{tikzpicture}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Syntax Basics}
-    \framesubtitle{Environments}
-    \begin{columns}
-        \begin{column}{.55\textwidth}
-                \action<+->{%
-                \lstinline|\\begin\{<environment-name>\}|\\
-                \lstinline|...|\\
-                \lstinline|\\end\{<environment-name>\}|}
-        \end{column}
-    \end{columns}
-\end{frame}
+% \begin{frame}
+%     \frametitle{Syntax Basics}
+%     \framesubtitle{Environments}
+%     \begin{center}
+%         \LARGE
+%         \parbox{20ex}{%
+%         \raggedright
+%         \tn{envbegin}{\texttt{\bslash\lstkw{begin}}\texttt{\bropen}\tn{envname1}{\texttt{document}}\texttt{\brclose}}\\%
+%         \tn{envcontent}{\quad\texttt{...}}\\%
+%         \tn{envend}{\texttt{\bslash\lstkw{end}}\texttt{\bropen}\tn{envname2}{\texttt{document}}\texttt{\brclose}}%
+%         }%
+%     \end{center}
+%     \begin{tikzpicture}[overlay, remember picture, thick]
+%         \coordinate[above=0.5mm of envbegin.north] (topbrackbase);
+%         \coordinate[above=2mm of envbegin.north] (topbrackhigh);
+%         \coordinate[below=0.5mm of envname1.south] (topbrackbaselow);
+%         \coordinate[below=2mm of envname1.south] (topbracklow);
+%         \coordinate[below=0.5mm of envend.south] (botbrackbase);
+%         \coordinate[below=2mm of envend.south] (botbracklow);
+%         \coordinate[above=0.5mm of envname2.north] (botbrackbasehigh);
+%         \coordinate[above=2mm of envname2.north] (botbrackhigh);
+%         \pause
+%         \node[left=3cm of {$(envbegin)!0.5!(envend)$}, text width=12ex, align=center]  (delimtxt) {Environment delimiters};
+%         \draw (topbrackbase-|{$(envbegin.north west)+(0.5mm,0)$}) |- (topbrackhigh-|envbegin.north) -| (topbrackbase-|{$(envbegin.north east)+(-0.5mm,0)$});
+%         \draw (topbrackhigh-|envbegin.north) -- ++(0,1mm) -| (delimtxt);
+        
+%         \draw (botbrackbase-|{$(envend.south west)+(0.5mm,0)$}) |- (botbracklow-|envend.south) -| (botbrackbase-|{$(envend.south east)+(-0.5mm,0)$});
+%         \draw (botbracklow-|envend.south) -- ++(0,-1mm) -| (delimtxt);
+
+%         \node[right=3cm of {$(envname1)!0.5!(envname2)$}, text width=12ex, align=center]  (nametxt) {Environment name};
+%         \draw (topbrackbaselow-|{$(envname1.south west)+(0.5mm,0)$}) |- (topbracklow-|envname1.south) -| (topbrackbaselow-|{$(envname1.south east)+(-0.5mm,0)$});
+%         \draw (topbracklow-|envname1.south) -- (nametxt);
+%         \draw (botbrackbasehigh-|{$(envname2.north west)+(0.5mm,0)$}) |- (botbrackhigh-|envname2.north) -| (botbrackbasehigh-|{$(envname2.north east)+(-0.5mm,0)$});
+%         \draw (botbrackhigh-|envname2.north) -- (nametxt);
+%     \end{tikzpicture}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Syntax Basics}
+%     \framesubtitle{Environments}
+%     \begin{columns}
+%         \begin{column}{.55\textwidth}
+%                 \action<+->{%
+%                 \lstinline|\\begin\{<environment-name>\}|\\
+%                 \lstinline|...|\\
+%                 \lstinline|\\end\{<environment-name>\}|}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
 
 \begin{frame}
     \frametitle{Syntax Basics}
-    \framesubtitle{Pitfalls}
-    \begin{columns}
-        \begin{column}{.44\textwidth}
-            \begin{itemize}
-                \item<+-> Special/Reserved Characters\\
-                \begin{tabular}{*{8}{>{\ttfamily}c}}
-                    \char`\_ & \$ & \% & \& & \bslash &\# & \bropen & \brclose \\
-                \end{tabular}
-            \end{itemize}
-        \end{column}
-    \end{columns}
+    \framesubtitle{Reserved Characters}
+    % [Speakers Notes]
+    % Now that we know commands and environments, 
+    % there are also some reserved characters that we cannot type regularly. 
+    % There are alternate ways to typeset them, so that we can use them in text if we need them.
+    % As we've already seen before, the backslash is on here, but also the curly braces from before.
+    % -------- Following might be better if we leave it out for now --------
+    % In addition there's the underscore and and hat symbol, that are used in mathematical formulas as sub- and superscript.
+    % There's also the dollar sign, which can be used to invoke the inline-math mode -- more on that later -- or the percentage symbol
+    % which can be used for comments (similar to comments in programming languages, such as C, C++, Java, etc.).
+    % The ampersand (&) is reserved for tabulators inside tables and the hash is used inside command definitions.
+    \begin{center}
+        \begin{tabular}{>{\ttfamily}c >{\ttfamily}l}
+            \textnormal{\textbf{Symbol}} & \textnormal{\textbf{Substitute}}\\
+            \toprule
+            \bslash         & \bslash textbackslash\\
+            \hline
+            \bropen         & \bslash\bropen\\
+            \hline
+            \brclose        & \bslash\brclose\\
+            \hline
+            \char`\_        & \bslash textunderscore\\
+            \hline
+            \char`\^        & \bslash textasciicircum\\
+            \hline
+            \$              & \bslash\$\\
+            \hline
+            \%              & \bslash\%\\
+            \hline
+            \textasciitilde & \bslash textasciitilde\\
+            \hline
+            \&              & \bslash\&\\
+            \hline
+            \#              & \bslash\#\\
+        \end{tabular}
+        % \begin{tabular}{*{9}{>{\ttfamily}c}}
+        %     \bslash & \bropen & \brclose & \char`\_ & \char`\^ & \$ & \% & \& &\# 
+        % \end{tabular}
+    \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{Syntax Basics}
     \framesubtitle{Summary}
     \begin{columns}
-        \begin{column}{.47\textwidth}
+        \begin{column}{.5\textwidth}
             % TODO: remove "Macro" from document as it may be confusing to have both terms. (maybe add as a footnote)
-            \begin{block}{\blockstrut Macros / Commands}<1->
-                \lstinline[keywords={macroName}]|\\macroName[<optional>]\{<argument>\}|\\%
-                \lstinline[keywords={macroName}]|\\macroName\{<argument>\}|
+            \begin{block}{\blockstrut Commands}<1->
+                \lstinline[keywords={commandName}]|\\commandName[<optional>]\{<argument>\}|\\%
+                \lstinline[keywords={commandName}]|\\commandName\{<argument>\}|
             \end{block}
             \begin{block}{\blockstrut Environments}<2->
                 \lstinline|\\begin\{<environment-name>\}|\\%
@@ -152,8 +238,8 @@
         \end{column}
         \begin{column}{.47\textwidth}
             \begin{block}{\blockstrut Reserved Characters}<3->
-                \begin{tabular}{*{9}{>{\ttfamily}c}}
-                    \bslash & \bropen & \brclose & \char`\_ & \char`\^ & \$ & \% & \& &\# 
+                \begin{tabular}{*{10}{>{\ttfamily}c}}
+                    \bslash & \bropen & \brclose & \char`\_ & \char`\^ & \$ & \% & \textasciitilde & \& &\# 
                 \end{tabular}
             \end{block}
         \end{column}

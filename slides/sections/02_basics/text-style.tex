@@ -1,20 +1,94 @@
 \begin{frame}
     \frametitle{Styling Text}
-    \framesubtitle{Macros}
-    % TODO: tabular with various text styles (macro, example(, description))
-
+    \framesubtitle{Commands}
+    \begin{center}
+    % \begin{tabular}{l l}
+    %     \textbf{Command}
+    %     & \textbf{Example}\\
+    % \toprule[1.2pt]
+    %     \lstinline|\\emph\{\}|          
+    %     & \emph{Emphasized}\\
+    % \midrule%
+    %     \lstinline|\\textbf\{\}|          
+    %     & \textbf{Bold}\\
+    % \midrule%
+    %     \lstinline|\\textit\{\}|       
+    %     & \textit{Italic}\\
+    % \midrule
+    %     \lstinline|\\textsc\{\}|       
+    %     & \textsc{SmallCaps}\\
+    % \midrule
+    %     \lstinline|\\textsl\{\}|       
+    %     & \textsl{Slanted}\\
+    % \midrule
+    %     \lstinline|\\textsf\{\}|       
+    %     & \textsf{Sans-Serif}\\
+    % \midrule
+    %     \lstinline|\\textrm\{\}|       
+    %     & \textrm{Roman}\\
+    % \midrule
+    %     \lstinline|\\texttt\{\}|       
+    %     & \texttt{Typewriter}\\
+    % \midrule
+    %     \lstinline|\\underline\{\}|       
+    %     & \underline{Underlined}\\
+    % \end{tabular}
+    \onslide<1->%
+    \begin{tabular}{@{}l l@{}}
+        \textbf{Command}
+        & \textbf{Example}\\
+    \toprule[1.2pt]
+        \lstinline|\\emph\{\}|          
+        & \emph{Emphasized}\\
+    \midrule%
+        \lstinline|\\textit\{\}|       
+        & \textit{Italic}\\
+    \midrule
+        \lstinline|\\textsl\{\}|       
+        & \textsl{Slanted}\\
+    \end{tabular}%
+    \onslide<2->%
+    \quad%
+    \begin{tabular}{@{}l l@{}}
+        \textbf{Command}
+        & \textbf{Example}\\
+    \toprule[1.2pt]
+        \lstinline|\\textbf\{\}|          
+        & \textbf{Bold}\\
+    \midrule
+        \lstinline|\\textsc\{\}|       
+        & \textsc{SmallCaps}\\
+    \midrule
+        \lstinline|\\textsf\{\}|       
+        & \textsf{Sans-Serif}\\
+    \end{tabular}%
+    \onslide<3->%
+    \quad%
+    \begin{tabular}{@{}l l@{}}
+        \textbf{Command}
+        & \textbf{Example}\\
+    \toprule[1.2pt]
+        \lstinline|\\textrm\{\}|       
+        & \textrm{Roman}\\
+    \midrule
+        \lstinline|\\texttt\{\}|       
+        & \texttt{Typewriter}\\
+    \midrule
+        \lstinline|\\underline\{\}|       
+        & \underline{Underlined}\\
+    \end{tabular}
+    
+    \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{Styling Text}
-    \framesubtitle{Usage}
-    % \framesubtitle{\textbf{Bold}, \textit{Italic}, \underline{underlined}, \textsc{SmallCaps}}
     \begin{columns}
-        \begin{column}{.57\textwidth}
-            \only<1>{\lstinputlisting[linerange={1-5,10}]{listings/text-styling.tex}}
-            \only<2->{\lstinputlisting{listings/text-styling.tex}}
+        \begin{column}{.59\textwidth}
+            \alt<1>{\tcbexinputlst{listings/sections.tex}}%
+            {\tcbexinputlst{listings/text-styling.tex}}
         \end{column}
-        \begin{column}{.42\textwidth}
+        \begin{column}{.4\textwidth}
             \centering
             \includegraphics<3->[%
                 width=0.95\textwidth,
