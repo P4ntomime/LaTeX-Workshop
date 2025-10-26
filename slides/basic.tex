@@ -8,6 +8,8 @@
 \date{\the\year}
 \institute[OST]{Ostschweizer Fachhochschule}
 
+\usepackage[utf8]{inputenc}         % input encoding: UTF-8
+\usepackage[T1]{fontenc}            % font encoding: T1
 \usepackage{notomath}
 % \usepackage{noto}
 
@@ -62,6 +64,22 @@
 \definecolor{keywordcolour}{HTML}{7f0055}
 \definecolor{stringcolour}{HTML}{9e22bd}
 \definecolor{numbercolour}{HTML}{808080}
+
+\newtcolorbox{myblock}[2][]{%
+    skin=bicolor,
+    colbacktitle={block title.bg},
+    coltitle={block title.fg},
+    colback={block body.bg!80!block title.bg},
+    colbacklower={block body.bg},
+    frame empty,
+    fonttitle=\normalfont,
+    title={\blockstrut#2},
+    before=,
+    after=\hfill,
+    % space=0,
+    split=0,
+    #1
+}
 
 \newtcblisting{exlisting}[2][]{%
     colbacktitle={block title example.bg},
