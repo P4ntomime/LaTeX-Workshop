@@ -1,63 +1,108 @@
 \begin{frame}
     \frametitle{A Short History of \LaTeX{}}
-    \begin{columns}
-        \vspace{-\abovedisplayskip}
-        \begin{column}<1->{.52\textwidth}
-            \begin{figure} 
-                \centering
-                \begin{tikzpicture}[%
-                    scale = 0.8,
-                    >={Latex}
-                ]
-                \tikzset{%
-                    block/.style = {%
-                    draw, thick, rectangle,
-                    minimum height = 0.8cm,
-                    minimum width = 1.6cm,
-                    rounded corners,
-                    fill = lightgray,
-                    }
-                }
+    \centering
+    \begin{tikzpicture}[%
+        every node/.style = {%
+            rounded corners,
+            draw,
+            text width = 9em,
+            align=center
+        },
+        >={Latex}
+    ]
+        \definecolor{latexfill}{HTML}{208080}
+        \definecolor{contextfill}{HTML}{5b5a9b} % actual color: 040266
+        \definecolor{contexttext}{HTML}{bdbcd3}
+        \definecolor{luatexfill}{HTML}{00037e}
+        \definecolor{xetexfill}{HTML}{a5ceff} % actual color: 76b4ff
+        \definecolor{xetextext}{HTML}{d7e5f6}
 
-                \node<1->[block, fill=teal] (TEX) at (2.5,2) {\textrm{\TeX}};
-                \node<2->[right] at (TEX.east) {1978};
+        \node at (0,0) (texnode) {\textbf{\TeX}\\\scriptsize1978 -- Donald Knuth};
+        
+        \node[below=1cm of texnode, fill=latexfill, text=white!95!black, draw=white!80!black] (latexnode) {\textbf{\LaTeX}\\\scriptsize1984 -- Leslie Lamport};
+        
+        \node[left=1cm of latexnode, fill=contextfill, text=contexttext, draw=white!60!black] (contextnode) {\textbf{\hologo{ConTeXt}}\\\scriptsize1996 -- Hans Hagen};
+        
+        \begin{scope}[%
+            every node/.style = {%
+                rounded corners,
+                draw,
+                text width = 6em,
+                align=center
+            }
+        ]
+            \node[below=1cm of contextnode, fill=xetexfill, text=xetextext, draw=white!60!black] (xetexnode) {\textbf{\hologo{XeTeX}}};
+            \node[below=2cm of latexnode] (pdftexnode) {\textbf{\hologo{pdfTeX}}};
+            \node[below right=2cm and 1cm of latexnode, fill=luatexfill, text=white!95!black, draw=white!80!black] (luatexnode) {\textbf{\hologo{LuaTeX}}};
+        \end{scope}
 
-                \node[block, color=darkgray, fill=lightgray] (CONTEXT) at (-1,.5) {\textrm{\hologo{ConTeXt}}};
-                \node[right, color=darkgray] at (CONTEXT.east) {1996};
-
-                \node[block] (XETEX) at (0,-2) {\textrm{\hologo{XeTeX}}};
-                \node[left] at (XETEX.west) {2004};
-                \node[block] (LATEX) at (2.5,-1) {\textrm{\LaTeX}};
-                \node[left] at (LATEX.west) {1984};
-                \node[block] (LUATEX) at (5,-2) {\textrm{\hologo{LuaTeX}}};
-                \node[left] at (LUATEX.west) {2007};
-
-                \draw[thick, ->] (TEX) to[out=-90, in=90] (LATEX);
-                \draw[thick, ->] (TEX) to[out=-90, in=90] (XETEX);
-                \draw[thick, ->] (TEX) to[out=-90, in=90] (LUATEX);
-                \draw[thick, ->, draw=darkgray] (TEX) to[out=-90, in=90] (CONTEXT);
-
-                \node[block, fill=blue!50!white] (XELATEX) at (1,-4) {\textrm{\hologo{XeLaTeX}}};
-                \node[block, fill=blue!50!white] (LUALATEX) at (4,-4) {\textrm{\hologo{LuaLaTeX}}};
-
-                \draw[thick, ->] (XETEX) to[out=-90, in=90] (XELATEX);
-                \draw[thick, ->] (LATEX) to[out=-90, in=90] (XELATEX);
-
-                \draw[thick, ->] (LUATEX) to[out=-90, in=90] (LUALATEX);
-                \draw[thick, ->] (LATEX) to[out=-90, in=90] (LUALATEX);
-
-                \end{tikzpicture}
-            \end{figure}
-            % \begin{block}{\LaTeX{}}
-            %     \begin{itemize}
-            %         \item<+-> Based on \TeX{} (1978)
-            %         \item<+-> Initial \LaTeX{} release: 1984
-            %         \item<+-> 
-            %     \end{itemize}
-            % \end{block}
-        \end{column}
-        \begin{column}<2->{.48\textwidth}
-            
-        \end{column}
-    \end{columns}
+        \draw[draw=lightgray, thick, ->] (texnode) to[out=-90, in=90] (contextnode);
+        \draw[thick, ->] (texnode) -- (latexnode);
+        \draw[draw=lightgray, thick, ->] (latexnode) to[out=-90, in=90] (xetexnode);
+        \draw[thick, ->] (latexnode) -- (pdftexnode);
+        \draw[thick, ->] (latexnode) to[out=-90, in=90] (luatexnode);
+    \end{tikzpicture}
 \end{frame}
+% \begin{frame}
+%     \frametitle{A Short History of \LaTeX{}}
+%     \begin{columns}
+%         \vspace{-\abovedisplayskip}
+%         \begin{column}<1->{.52\textwidth}
+%             \begin{figure} 
+%                 \centering
+%                 \begin{tikzpicture}[%
+%                     scale = 0.8,
+%                     >={Latex}
+%                 ]
+%                 \tikzset{%
+%                     block/.style = {%
+%                     draw, thick, rectangle,
+%                     minimum height = 0.8cm,
+%                     minimum width = 1.6cm,
+%                     rounded corners,
+%                     fill = lightgray,
+%                     }
+%                 }
+
+%                 \node<1->[block, fill=teal] (TEX) at (2.5,2) {\textrm{\TeX}};
+%                 \node<2->[right] at (TEX.east) {1978};
+
+%                 \node[block, color=darkgray, fill=lightgray] (CONTEXT) at (-1,.5) {\textrm{\hologo{ConTeXt}}};
+%                 \node[right, color=darkgray] at (CONTEXT.east) {1996};
+
+%                 \node[block] (XETEX) at (0,-2) {\textrm{\hologo{XeTeX}}};
+%                 \node[left] at (XETEX.west) {2004};
+%                 \node[block] (LATEX) at (2.5,-1) {\textrm{\LaTeX}};
+%                 \node[left] at (LATEX.west) {1984};
+%                 \node[block] (LUATEX) at (5,-2) {\textrm{\hologo{LuaTeX}}};
+%                 \node[left] at (LUATEX.west) {2007};
+
+%                 \draw[thick, ->] (TEX) to[out=-90, in=90] (LATEX);
+%                 \draw[thick, ->] (TEX) to[out=-90, in=90] (XETEX);
+%                 \draw[thick, ->] (TEX) to[out=-90, in=90] (LUATEX);
+%                 \draw[thick, ->, draw=darkgray] (TEX) to[out=-90, in=90] (CONTEXT);
+
+%                 \node[block, fill=blue!50!white] (XELATEX) at (1,-4) {\textrm{\hologo{XeLaTeX}}};
+%                 \node[block, fill=blue!50!white] (LUALATEX) at (4,-4) {\textrm{\hologo{LuaLaTeX}}};
+
+%                 \draw[thick, ->] (XETEX) to[out=-90, in=90] (XELATEX);
+%                 \draw[thick, ->] (LATEX) to[out=-90, in=90] (XELATEX);
+
+%                 \draw[thick, ->] (LUATEX) to[out=-90, in=90] (LUALATEX);
+%                 \draw[thick, ->] (LATEX) to[out=-90, in=90] (LUALATEX);
+
+%                 \end{tikzpicture}
+%             \end{figure}
+%             % \begin{block}{\LaTeX{}}
+%             %     \begin{itemize}
+%             %         \item<+-> Based on \TeX{} (1978)
+%             %         \item<+-> Initial \LaTeX{} release: 1984
+%             %         \item<+-> 
+%             %     \end{itemize}
+%             % \end{block}
+%         \end{column}
+%         \begin{column}<2->{.48\textwidth}
+            
+%         \end{column}
+%     \end{columns}
+% \end{frame}
