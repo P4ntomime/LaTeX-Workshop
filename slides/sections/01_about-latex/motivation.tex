@@ -1,33 +1,121 @@
-
 \begin{frame}
-    \frametitle{What even is \LaTeX{}?}
-    \framesubtitle<3->{And why should \textit{you} use it?}
-    \begin{columns}
-    \begin{column}{.47\textwidth}
-    \action<2->{It's a typesetting language!}
-    \begin{itemize}
-        \item Markdown
-        \item Word
-        \item Adobe Indesign
-        \item Affinity Publisher
-        \note[item]{%
-            In the world of typesetting there are two types of editors:
-            Appearance before structure:
-                - Adobe Illustrator
-                - Affinity Designer
-                - Inkscape
-            Structure before appearance:
-                - Markdown
-                - LaTeX
-                - Typst
-            Stuff inbetween (worse at both): 
-                - Word
-                - Pages
-        }
-    \end{itemize}
+    \frametitle{What Problem Are We Solving?}
+    \begin{columns}[t]
+    \begin{column}<+->{.36\textwidth}
+        \begin{myblock}[height=.7\textheight]{\centering Appearance Before Structure}
+            \centering
+            \rule[-2.5em]{0pt}{5.5em}\parbox[t]{.32\columnwidth}{%
+                \centering
+                \includegraphics[height=1cm]{figs/illustrator-logo.pdf}
+                \footnotesize
+
+                Adobe Illustrator
+            }\hfill
+            \parbox[t]{.32\columnwidth}{%
+                \centering
+                \includegraphics[height=1cm]{figs/indesign-logo.pdf}
+                \footnotesize
+                
+                Adobe Indesign
+            }\hfill
+            \parbox[t]{.32\columnwidth}{%
+                \centering
+                \includegraphics[height=1cm]{figs/inkscape-logo.pdf}
+                \footnotesize
+
+                Inkscape
+            }
+            \tcblower\small
+            \begin{itemize}
+                \item[\textbf{+}] Professional layout
+                \item[\textbf{--}] Not really built for technical docs
+            \end{itemize}
+        \end{myblock}
     \end{column}
-    \begin{column}{.52\textwidth}
-    \action<3->{%
+    \begin{column}<+->{.27\textwidth}
+        \begin{myblock}[height=.7\textheight]{\centering\emph{WYSWYG}}
+            \centering
+            \rule[-2.5em]{0pt}{5.5em}\parbox[t]{.32\columnwidth}{%
+                \centering
+                \includegraphics[height=1cm]{figs/ms-word-logo.pdf}
+                \footnotesize
+                
+                MS Word
+            }\hfill
+            \parbox[t]{.32\columnwidth}{%
+                \centering
+                \includegraphics[height=1cm]{figs/google-docs-logo.pdf}
+                \footnotesize
+                
+                Google Docs
+            }\hfill
+            \parbox[t]{.32\columnwidth}{%
+                \centering
+                \includegraphics[height=1cm]{figs/pages-logo.png}
+                \footnotesize
+
+                Pages
+            }
+            \tcblower\small
+            \begin{itemize}
+                \item[\textbf{+}] Easy
+                \item[\textbf{--}] Formatting is a pain
+                \item[\textbf{--}] Poor math typesetting
+            \end{itemize}
+        \end{myblock}
+    \end{column}
+    \begin{column}<+->{.36\textwidth}
+        \begin{myblock}[height=.7\textheight]{\centering Structure Before Appearance}
+            \centering
+            \rule[-2.5em]{0pt}{5.5em}\parbox[t]{.32\columnwidth}{%
+                \centering
+                \includegraphics[width=1cm]{figs/markdown-logo.pdf}
+                \footnotesize
+                
+                Markdown
+            }\hfill
+            \resizebox{.32\columnwidth}{!}{%
+                \LaTeX{}%
+            }\hfill
+            \raisebox{-.55em}{% Needed so typst logo baseline matches LaTeX logo baseline
+                \includegraphics[width=.32\columnwidth]{figs/typst-logo.pdf}%
+            }
+            \tcblower\small
+            \begin{itemize}
+                \item[\textbf{+}] Optimized for scientific typesetting
+                \item[\textbf{--}] [Markdown] Limited for complex math
+            \end{itemize}
+        \end{myblock}
+    \end{column}
+    \end{columns}
+\end{frame}
+\begin{frame}
+    \frametitle{What Is \LaTeX{}?}
+    \begin{itemize}
+        \item<+-> A markup language for typesetting high-quality documents
+        \item<+-> Programmatic\\
+            \begin{tikzpicture}[%
+                thick,
+                every node/.style={
+                    draw,
+                    rounded corners,
+                    minimum width=8em,
+                    minimum height=2em
+                },
+                >={Latex}
+            ]
+                \node (texsource) {\texttt{.tex} source};
+                \node[right=5mm of texsource] (latexengine) {\LaTeX{} engine};
+                \node[right=5mm of latexengine] (output) {PDF};
+                
+                \draw[->] (texsource) -- (latexengine);
+                \draw[->] (latexengine) -- (output);
+            \end{tikzpicture}
+        \item<+-> Separation of content and appearance
+    \end{itemize}
+\end{frame}
+\begin{frame}
+    \frametitle{Why Should You Learn It?}
     \begin{tikzpicture}
     \begin{axis}[
         smooth, samples = 100,
@@ -47,12 +135,10 @@
         legend style = { legend pos = north west },
         no markers, domain = 0:25,
     ]
-        \plot[very thick, teal, domain=0:14]{exp(x/3 - 2.5)};
+        \plot[densely dashed, very thick, palette quaternary.bg, domain=0:14]{exp(x/3 - 2.5)};
         \addlegendentry{Word}
-        \plot[very thick, blue]{3/(1 + exp(-2*(x-2.5))) + x/50*exp((x-4)/12)};
+        \plot[very thick, palette primary.bg]{3/(1 + exp(-2*(x-2.5))) + x/50*exp((x-4)/12)};
         \addlegendentry{\textrm{\LaTeX}}
     \end{axis}
-    \end{tikzpicture}}
-    \end{column}
-    \end{columns}
+    \end{tikzpicture}
 \end{frame}
