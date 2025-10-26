@@ -1,10 +1,12 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper, 12pt]{article}
 
 % preamble
 
-\usepackage{fontspec}
-\usepackage{polyglossia}
-\setdefaultlanguage{english}
+\usepackage[utf8]{inputenc}         % input encoding: UTF-8
+\usepackage[T1]{fontenc}            % font encoding: T1
+\usepackage[main=english]{babel}
+\usepackage{times}                  % times new roman font
+\usepackage{inconsolata}            % inconsolata font for listings
 
 % margins
 \usepackage[margin=3cm]{geometry}
@@ -15,6 +17,7 @@
 % mathematical typesetting
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{txfonts}                % Times math font
 \usepackage{esint}
 
 % compact lists
