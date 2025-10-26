@@ -18,10 +18,18 @@
         \definecolor{xetextext}{HTML}{d7e5f6}
 
         \node at (0,0) (texnode) {\textbf{\TeX}\\\scriptsize1978 -- Donald Knuth};
+        \node[draw=none,right=1cm of texnode]{\includegraphics[width=1.8cm]{figs/knuth.jpg}};
+
         
-        \node[below=1cm of texnode, fill=latexfill, text=white!95!black, draw=white!80!black] (latexnode) {\textbf{\LaTeX}\\\scriptsize1984 -- Leslie Lamport};
+        \onslide<2->{%
+        \node[below=1cm of texnode, fill=latexfill, text=white!97!black, draw=white!80!black] (latexnode) {\textbf{\LaTeX}\\\scriptsize1984 -- Leslie Lamport};
+        \node[draw=none,right=1cm of latexnode]{\includegraphics[width=1.8cm]{figs/lamport.jpg}};
+        }
+
         
+        \onslide<3->{%
         \node[left=1cm of latexnode, fill=contextfill, text=contexttext, draw=white!60!black] (contextnode) {\textbf{\hologo{ConTeXt}}\\\scriptsize1996 -- Hans Hagen};
+        }
         
         \begin{scope}[%
             every node/.style = {%
@@ -31,16 +39,32 @@
                 align=center
             }
         ]
+            \onslide<4->{%
             \node[below=1cm of contextnode, fill=xetexfill, text=xetextext, draw=white!60!black] (xetexnode) {\textbf{\hologo{XeTeX}}};
+            }
+            \onslide<5->{%
             \node[below=2cm of latexnode] (pdftexnode) {\textbf{\hologo{pdfTeX}}};
-            \node[below right=2cm and 1cm of latexnode, fill=luatexfill, text=white!95!black, draw=white!80!black] (luatexnode) {\textbf{\hologo{LuaTeX}}};
+            }
+            \onslide<6->{%
+            \node[below right=2cm and 1cm of latexnode, fill=luatexfill, text=white!97!black, draw=white!80!black] (luatexnode) {\textbf{\hologo{LuaTeX}}};
+            }
         \end{scope}
 
+        \onslide<3->{%
         \draw[draw=lightgray, thick, ->] (texnode) to[out=-90, in=90] (contextnode);
+        }
+        \onslide<2->{%
         \draw[thick, ->] (texnode) -- (latexnode);
+        }
+        \onslide<4->{%
         \draw[draw=lightgray, thick, ->] (latexnode) to[out=-90, in=90] (xetexnode);
+        }
+        \onslide<5->{%
         \draw[thick, ->] (latexnode) -- (pdftexnode);
+        }
+        \onslide<6->{%
         \draw[thick, ->] (latexnode) to[out=-90, in=90] (luatexnode);
+        }
     \end{tikzpicture}
 \end{frame}
 % \begin{frame}
