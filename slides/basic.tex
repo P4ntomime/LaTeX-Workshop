@@ -35,7 +35,8 @@
   matrix,
   arrows,
   arrows.meta,
-  bending
+  bending,
+  fit
 }
 
 
@@ -49,6 +50,10 @@
 \usepackage[table]{xcolor}
 \usepackage{graphicx}               % include graphics
 \usepackage[export]{adjustbox}
+
+\usepackage{hyperref}               % clickable links
+\usepackage{qrcode}                 % QR code generation (also clickable)
+\hypersetup{hidelinks}
 
 \usepackage{multirow}
 \usepackage{booktabs}               % thick and thin lines in tables
@@ -217,7 +222,18 @@
 
 \lstdefinestyle{latexstyle}{%
     language=[LaTeX]TeX,
-    keywords={subsection,subsubsection,part,chapter,paragraph,subparagraph,operatorname,DeclareMathOperator,arcsinh}
+    keywords={%
+        subsection,
+        subsubsection,
+        part,
+        chapter,
+        paragraph,
+        subparagraph,
+        operatorname,
+        DeclareMathOperator,
+        arcsinh,
+        hline
+    }
 }
 % C++ style for listings
 % \lstdefinestyle{cppstyle}{%
@@ -394,9 +410,9 @@
 
     % \input{sections/02_getting-started/_getting-started.tex}
 
-    \input{sections/03_math-tables-and-figures/_math-tables-and-figures.tex}
+    % \input{sections/03_tables-and-math/_tables-and-math.tex}
     
-    % \input{sections/04_intermediate-latex/_intermediate-latex.tex}
+    \input{sections/04_intermediate-latex/_intermediate-latex.tex}
 
     % \input{sections/05_advanced/_advanced.tex}
     
