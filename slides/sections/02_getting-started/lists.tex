@@ -1,0 +1,97 @@
+\begin{frame}
+    \frametitle{Lists}
+    % We have 3 different kinds of lists: itemize, enumerate, description
+    \centering
+    \begin{tabular}{c l}
+        \textbf{Environment}
+        & \textbf{Description}\\
+    \toprule[1.2pt]\pause
+        \texttt{itemize}
+        & For simple lists with bullet points.\\
+    \midrule\pause
+        \texttt{enumerate}
+        & For numbered lists.\\
+    \midrule\pause
+        \texttt{description}
+        & For lists describing terms.\\
+    \end{tabular}
+
+    \only<5->{%
+    \begin{center}
+        \begin{myblock}[width=16em,middle=0mm,valign lower=top,valign=center]{\blockstrut Special Command}
+            \lstinline|\\item[]|
+        \tcblower
+        \begin{itemize}
+            \item Delimits a new item.
+            \item \lstinline|[]| is optional for \texttt{itemize} and \texttt{enumerate}.
+        \end{itemize}
+        \end{myblock}
+    \end{center}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Lists}
+    \framesubtitle{Itemize}
+    \begin{columns}
+        \begin{column}{.59\textwidth}
+            \tcbexinputlst{listings/itemize.tex}
+        \end{column}
+        \begin{column}{.4\textwidth}
+            \input{listings/itemize.tex}            
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Lists}
+    \framesubtitle{Enumerate}
+    \begin{columns}
+        \begin{column}{.59\textwidth}
+            \tcbexinputlst{listings/enumerate.tex}
+        \end{column}
+        \begin{column}{.4\textwidth}
+            \input{listings/enumerate.tex}            
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Lists}
+    \framesubtitle{Description}
+    \begin{columns}
+        \begin{column}{.59\textwidth}
+            \tcbexinputlst{listings/description.tex}
+        \end{column}
+        \begin{column}{.4\textwidth}
+            \input{listings/description.tex}            
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Lists}
+    \framesubtitle{Summary}
+    \begin{columns}
+        \begin{column}{.31\textwidth}
+            \begin{myblock}{\blockstrut Itemize}
+                \lstinline|\begin{itemize}|\\
+                \lstinline|  \item ...|\\
+                \lstinline|\end{itemize}|
+            \end{myblock}
+        \end{column}
+        \begin{column}{.31\textwidth}
+            \begin{myblock}{\blockstrut Enumerate}
+                \lstinline|\begin{enumerate}|\\
+                \lstinline|  \item ...|\\
+                \lstinline|\end{enumerate}|
+            \end{myblock}
+        \end{column}
+        \begin{column}{.31\textwidth}
+            \begin{myblock}{\blockstrut Description}
+                \lstinline|\begin{description}|\\
+                \lstinline|  \item[<term>] ...|\\
+                \lstinline|\end{description}|
+            \end{myblock}
+        \end{column}
+    \end{columns}
+\end{frame}
