@@ -7,11 +7,72 @@
             \item<+-> Captions can be tedious
         \end{itemize}
         \item<+->[Idea] Only give \LaTeX{} a placement \emph{suggestion} and let it decide where to optimally place the image.
-        \item<+->[Solution] Floating environments \texttt{figure} and \texttt{table} environment
+        \item<+->[Solution] Floating environments \texttt{figure} and \texttt{table}.
     \end{description}
 \end{frame}
 \begin{frame}
     \frametitle{Floating Environments}
-    \framesubtitle{Structure}
-    \tcbexinputlst[linerange={6-11}]{listings/float-structure.tex}
+    \framesubtitle<-7>{Structure}
+    \only<-7>{%
+    \Large
+    \texttt{\bslash\lstkw{begin}\bropen figure\brclose\uncover<2->{\tn{placement}{[t]}}}\\
+    \uncover<3->{\texttt{\phantom{xx}\tn{alignment}{\bslash\lstkw{centering}}}\\}
+    \uncover<4->{\texttt{\phantom{xx}\bslash\lstkw{includegraphics}\bropen example-image-a\brclose}\\}
+    \uncover<5->{\texttt{\phantom{xx}\tn{caption}{\bslash\lstkw{caption}\bropen A caption\brclose}}\\}
+    \uncover<6->{\texttt{\phantom{xx}\tn{label}{\bslash\lstkw{label}\bropen fig:example-a\brclose}}\\}
+    \texttt{\bslash\lstkw{end}\bropen figure\brclose}
+
+    \begin{tikzpicture}[thick,remember picture, overlay, every node/.style={inner xsep=0.5pt, inner ysep=1pt}]
+        \coordinate[right=5cm of placement] (txtleft);
+        \only<2,7>{%
+        \node[draw, dashed, fit={(placement)}] (placementoutline){};
+        \node[anchor=west] at (placement-|txtleft) (placementtxt) {Placement option};
+        \draw (placementoutline) -- (placementtxt);}
+
+        \only<3,7>{%
+        \node[draw, dashed, inner xsep=3pt,fit={(alignment)}] (alignmentoutline){};
+        \node[anchor=west] at (alignment-|txtleft) (alignmenttxt) {Justification};
+        \draw (alignmentoutline) -- (alignmenttxt);}
+        
+        \only<5,7>{%
+        \node[draw, dashed, inner xsep=3pt,fit={(caption)}] (captionoutline){};
+        \node[anchor=west] at (caption-|txtleft) (captiontxt) {Figure caption};
+        \draw (captionoutline) -- (captiontxt);}
+        
+        \only<6,7>{%
+        \node[draw, dashed, inner xsep=3pt,fit={(label)}] (labeloutline){};
+        \node[anchor=west] at (label-|txtleft) (labeltxt) {Label};
+        \draw (labeloutline) -- (labeltxt);}
+    \end{tikzpicture}}
+
+    \framesubtitle<8->{Placement Options}
+    \only<8->{%
+    \begin{center}
+    \begin{tabular}{>{\ttfamily}c l}
+    \onslide<8-13>
+        \textnormal{\textbf{Option}}
+        & \textbf{Description}\\
+    \toprule[1.2pt]
+    \onslide<9-13>
+        h
+        & Place figure \emph{here} (\emph{approximately}).\\
+    \midrule
+    \onslide<10-13>
+        t
+        & Place figure at \emph{top} of page.\\
+    \midrule
+    \onslide<11-13>
+        b
+        & Place figure at \emph{bottom} of page.\\
+    \midrule
+    \onslide<12-13>
+        p
+        & Place figure on special \emph{page}.\\
+    \midrule
+    \onslide<13-13>
+        !
+        & Force placement.\\
+    \end{tabular}
+    \end{center}
+    }
 \end{frame}

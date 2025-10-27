@@ -5,14 +5,14 @@
     \begin{column}{.48\textwidth}
     \Large
     \texttt{\bslash}\lstkw{begin}\texttt{\bropen\tn{envname1}{tabular}\brclose}\uncover<2->{\tn{tabopt}{\texttt{\bropen l c r\brclose}}\\}
-    \uncover<4->{\hspace{2em}\texttt{left}\\}
-    \uncover<4->{\hspace{2em}\texttt{\tn{amp1}{\&} centered}\\}
-    \uncover<4->{\hspace{2em}\texttt{\tn{amp2}{\&} right\tn{newline}{\bslash\bslash}}\\}
+    \uncover<4->{\texttt{\phantom{xx}left}\\}
+    \uncover<4->{\texttt{\phantom{xx}\tn{amp1}{\&} centered}\\}
+    \uncover<4->{\texttt{\phantom{xx}\tn{amp2}{\&} right\tn{newline}{\bslash\bslash}}\\}
     \uncover<7->{\tn{hlinecmd}{\texttt{\bslash}\lstkw{hline}}\\}
     \uncover<9->{%
-    \hspace{2em}\texttt{more left}\\
-    \hspace{2em}\texttt{\& more centered}\\
-    \hspace{2em}\texttt{\& more right\bslash\bslash}\\}
+    \texttt{\phantom{xx}more left}\\
+    \texttt{\phantom{xx}\& more centered}\\
+    \texttt{\phantom{xx}\& more right\bslash\bslash}\\}
     \texttt{\bslash}\lstkw{end}\texttt{\bropen\tn{envname2}{tabular}\brclose}
     \tikz[remember picture, overlay]{%
         \coordinate[right=2cm of tabopt](textleft);

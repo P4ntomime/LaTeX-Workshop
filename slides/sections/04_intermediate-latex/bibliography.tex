@@ -1,6 +1,22 @@
 \begin{frame}
-    \frametitle{Bibliography}
+    \frametitle{Bibliography -- The \texttt{biblatex} package}
+    \framesubtitle{Principle}
 
-    
+    \begin{center}
+        \begin{tikzpicture}[every node/.style={thick,rounded corners,draw, minimum width=3em, minimum height=1.2em}, >={Latex}]
+            \node (latex1) {\LaTeX};
+            \node[right=5mm of latex1] (biber) {biber};
+            \node[right=5mm of biber] (latex2) {\LaTeX};
+            \node[fit={(latex1) (biber) (latex2)},label={Compilation}] (compilation) {};
+            \node[right=7.5mm of compilation] (pdffile) {\texttt{.pdf}};
+            \node[below left=-2mm and 7.5mm of compilation] (texfile){\texttt{.tex}};
+            \node[above left=-2mm and 7.5mm of compilation] (bibfile){\texttt{.bib}};
 
+            \draw[thick,->] (texfile.east) -- ($(compilation.west)!0.25!(compilation.south west)$);
+            \draw[thick,->] (bibfile.east) -- ($(compilation.west)!0.25!(compilation.north west)$);
+            \draw[thick,->] (latex1) -- (biber);
+            \draw[thick,->] (biber) -- (latex2);
+            \draw[thick,->] (compilation) -- (pdffile);
+        \end{tikzpicture}
+    \end{center}
 \end{frame}
