@@ -1,0 +1,23 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{graphicx}
+  
+\begin{document}
+This is some text in a minimal document with a figure~\ref{fig:example-a}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=3cm]{example-image-a}
+  \caption{This is the caption of a figure.}
+  \label{fig:example-a}
+\end{figure}
+and a table~\ref{tab:lorem-ipsum}.
+\begin{table}[b]
+  \centering
+  \begin{tabular}{c l}
+    lorem & ipsum\\
+    \hline\hline
+    dolor & sit\\
+  \end{tabular}
+  \caption{This is the caption of a table.}
+  \label{tab:lorem-ipsum}
+\end{table}
+\end{document}
