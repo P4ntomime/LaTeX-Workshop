@@ -1,0 +1,17 @@
+\begin{frame}
+    \frametitle{Positioning Figures and Tables}
+    \begin{description}
+        \item<+->[Problem] \lstinline|\\includegraphics[]\{\}| and \lstinline|\\begin\{tabular\}...\\end\{tabular\}| typeset images/tables inline
+        \begin{itemize}
+            \item<+-> Often leads to ugly documents
+            \item<+-> Captions can be tedious
+        \end{itemize}
+        \item<+->[Idea] Only give \LaTeX{} a placement \emph{suggestion} and let it decide where to optimally place the image.
+        \item<+->[Solution] Floating environments \texttt{figure} and \texttt{table} environment
+    \end{description}
+\end{frame}
+\begin{frame}
+    \frametitle{Floating Environments}
+    \framesubtitle{Structure}
+    \tcbexinputlst[linerange={6-11}]{listings/float-structure.tex}
+\end{frame}
