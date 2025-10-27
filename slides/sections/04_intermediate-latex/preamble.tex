@@ -1,8 +1,43 @@
 \begin{frame}
-    \frametitle{Document Setup}
-    \framesubtitle{Explanation}
-    % TODO: Insert doc-setup example first, so we remember what that looks like
-    But what about this empty line?
-    \lstinputlisting[linewidth=.57\textwidth, frame={rl},showlines=true,firstnumber=2,linerange={2-2}]{listings/bare-minimum.tex}
-    \action<2->{This is the preamble}
+    \frametitle{Document Setup Revisited}
+    \action<1-2>{\tcbinputlst[linerange={1-1}][width=.59\textwidth, sharp corners=south]{listings/bare-minimum.tex}}
+    \begin{itemize}
+        \item<1-2> Tell \LaTeX{} we want to use the \texttt{article} class for this document
+        \item<1-2> \texttt{article} has some options e.g.: \texttt{a4paper}, \texttt{12pt}
+    \end{itemize}
+    \only<2-3>{%
+    \tcbinputlst[firstnumber={2},linerange={2-2},showlines=true][width=.59\textwidth, sharp corners]{listings/bare-minimum.tex}
+    \begin{itemize}
+        \item \alt<2>{What about this empty line?}{This is the preamble}
+    \end{itemize}}
+    \action<1-2>{\tcbinputlst[firstnumber={3},linerange={3-5}][width=.59\textwidth, sharp corners=north]{listings/bare-minimum.tex}}
+    \begin{itemize}
+        \item<1-2> The \texttt{document} environment containing content
+    \end{itemize}
+\end{frame}
+\begin{frame}
+    \frametitle{Preamble}
+    \only<1-3>{%
+    \framesubtitle{What is That?}
+    \begin{itemize}
+        \item<+-3> Include packages
+        \item<+-3> Define document formatting
+        \item<+-3> Define custom commands% with \lstinline|\\newcommand\{\}[][]\{\}|
+    \end{itemize}
+    }
+
+    \only<4->{%
+    \begin{columns}
+    \begin{column}{.65\textwidth}
+        \tcbexinputlst[keywords={redtext,textcolor}]{listings/preamble.tex}
+    \end{column}
+    \begin{column}{.32\textwidth}
+        \includegraphics[%
+                width=\dimexpr\textwidth-.8pt\relax, 
+                frame,
+                clip=true,
+                trim=4cm 24cm 3cm 4cm
+            ]{listings/preamble.pdf}
+    \end{column}
+    \end{columns}}
 \end{frame}
