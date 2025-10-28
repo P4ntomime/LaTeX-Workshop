@@ -1,0 +1,68 @@
+\begin{frame}
+    \frametitle{But wait\ldots}
+    \begin{center}
+        \Large
+        What about those linebreaks?
+    \end{center}
+
+    \bigskip
+    \begin{columns}
+        \begin{column}{.55\textwidth}
+            \tcbinputlst[linerange={4-8},firstnumber={4}][sharp corners]{listings/text-styling.tex}
+        \end{column}
+        \begin{column}{.43\textwidth}
+            \centering
+            \includegraphics[%
+                width=0.98\textwidth,
+                frame,
+                clip=true,
+                trim=3cm 23cm 3cm 4cm
+            ]{listings/text-styling.pdf}   
+        \end{column}
+    \end{columns}
+\end{frame}
+\begin{frame}
+    \frametitle{Linebreaks}
+    \framesubtitle<1-3>{When Do We Need Linebreaks?}
+    \only<1-3>{%
+    \begin{itemize}
+        \item<2-> At the end of a paragraph
+        \item<3-> Otherwise: Let \LaTeX{} handle it
+    \end{itemize}}
+    \framesubtitle<4-5>{Paragraphs}
+    \only<4-5>{%
+    Insert empty line:
+
+    \begin{columns}
+    \begin{column}{.55\textwidth}
+        \tcbinputlst[linerange={4-10},firstnumber={4}][sharp corners]{listings/linebreak.tex}
+    \end{column}
+    \begin{column}{.43\textwidth}
+        \centering
+        \includegraphics<5>[%
+            width=0.98\textwidth,
+            frame,
+            clip=true,
+            trim=3cm 22cm 3cm 4cm
+        ]{listings/linebreak.pdf}   
+    \end{column}
+    \end{columns}}
+    \framesubtitle<6-7>{Removing Indentation}
+    \only<6-7>{%
+    Add \lstinline|\\noindent|
+
+    \begin{columns}
+    \begin{column}{.55\textwidth}
+        \tcbinputlst[linerange={4-11},firstnumber={4}][sharp corners]{listings/linebreak-no-indent.tex}
+    \end{column}
+    \begin{column}{.43\textwidth}
+        \centering
+        \includegraphics<7>[%
+            width=0.98\textwidth,
+            frame,
+            clip=true,
+            trim=3cm 22cm 3cm 4cm
+        ]{listings/linebreak-no-indent.pdf}   
+    \end{column}
+    \end{columns}}
+\end{frame}
