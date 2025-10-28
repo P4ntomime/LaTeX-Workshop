@@ -1,0 +1,1119 @@
+\documentclass[aspectratio=169]{beamer}
+% \documentclass[aspectratio=169,handout]{beamer}
+
+% \input{preamble.tex}
+
+\title{\LaTeX{} Workshop}
+\subtitle{An Introductory Course}
+\author{Laurin Heitzer}
+\date{\the\year}
+\institute[OST]{Ostschweizer Fachhochschule}
+
+\usepackage[utf8]{inputenc}         % input encoding: UTF-8
+\usepackage[T1]{fontenc}            % font encoding: T1
+\usepackage{notomath}
+\usepackage{amsmath}
+% \usepackage{noto}
+
+% \usetheme{Warsaw}
+% \usetheme{Marburg}
+\usetheme{own}
+\addtobeamertemplate{note page}{}{\thispdfpagelabel{notes:\insertframenumber}}
+% \usecolortheme{own}
+% \usetheme{CambridgeUS}
+% \usefonttheme{serif}
+% Theme options: Warsaw, Marburg, Frankfurt, CambridgeUS
+% \usefonttheme{serif}
+\usepackage{inconsolata}            % inconsolata font for listings
+
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{%
+  calc,
+  positioning,
+  backgrounds,
+  decorations.pathreplacing,
+  decorations.markings,
+  matrix,
+  arrows,
+  arrows.meta,
+  bending,
+  fit
+}
+
+% \usepackage{pgfpages}
+% \setbeameroption{show notes on second screen}
+
+\usepackage{pgf-pie}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
+\usepackage{hologo}
+
+% \usepackage{tabu}
+\usepackage[table]{xcolor}
+\usepackage{graphicx}               % include graphics
+\usepackage[export]{adjustbox}
+
+\usepackage{hyperref}               % clickable links
+\usepackage{qrcode}                 % QR code generation (also clickable)
+\hypersetup{hidelinks}
+
+\usepackage{multirow}
+\usepackage{booktabs}               % thick and thin lines in tables
+\usepackage{tabularx}
+% \usepackage{nicematrix}
+\usepackage{array}
+\usepackage{tcolorbox}
+\tcbuselibrary{listingsutf8}
+% \usepackage{listings}
+% colors for listings (code)
+\definecolor{backcolour}{HTML}{f5f5f0} % background color for highlighted text
+\definecolor{commentcolour}{HTML}{6a9955}
+\definecolor{keywordcolour}{HTML}{7f0055}
+\definecolor{stringcolour}{HTML}{9e22bd}
+\definecolor{numbercolour}{HTML}{808080}
+
+% we need to use every beamercolor here once, so they are available with their names for the following definitions
+\usebeamercolor{structure}
+\usebeamercolor{palette primary}
+\usebeamercolor{palette secondary}
+\usebeamercolor{palette tertiary}
+\usebeamercolor{palette quaternary}
+\usebeamercolor{sidebar}
+\usebeamercolor{palette sidebar primary}
+\usebeamercolor{palette sidebar secondary}
+\usebeamercolor{palette sidebar tertiary}
+\usebeamercolor{palette sidebar quaternary}
+\usebeamercolor{titlelike}
+\usebeamercolor{separation line}
+\usebeamercolor{fine separation line}
+\usebeamercolor{alerted text}
+\usebeamercolor{example text}
+\usebeamercolor{block title}
+\usebeamercolor{block title alerted}
+\usebeamercolor{block title example}
+\usebeamercolor{block body}
+\usebeamercolor{block body alerted}
+\usebeamercolor{block body example}
+
+\newtcolorbox{myblock}[2][]{%
+    skin=bicolor,
+    colbacktitle={block title.bg},
+    coltitle={block title.fg},
+    colback={block body.bg!80!block title.bg},
+    colbacklower={block body.bg},
+    frame empty,
+    fonttitle=\normalfont,
+    title={\blockstrut#2},
+    before=,
+    after=\hfill,
+    % space=0,
+    split=0,
+    #1
+}
+
+\newtcblisting{exlisting}[2][]{%
+    colbacktitle={block title example.bg},
+    coltitle={block title example.fg},
+    colback={block body example.bg},
+    frame empty,
+    listing only,
+    listing options={%
+        numberstyle=\ttfamily\small\color{numbercolour},
+        numbersep=1.5ex,
+        aboveskip=0mm,
+        belowskip=0mm,
+        backgroundcolor=,
+    },
+    fonttitle=\normalfont,
+    overlay={%
+        \begin{tcbclipinterior}%
+            \fill[block title example.bg!20!block body example.bg] (frame.south west)%
+                rectangle ([xshift=4mm]frame.north west);%
+        \end{tcbclipinterior}%
+    },
+    title={\blockstrut#2},%
+    #1
+}
+
+\newtcblisting{exlistingnotitle}[1][]{%
+    colback={block body example.bg},
+    frame empty,
+    listing only,
+    listing options={%
+        numberstyle=\ttfamily\small\color{numbercolour},
+        numbersep=1.5ex,
+        aboveskip=0mm,
+        belowskip=0mm,
+        backgroundcolor=,
+    },
+    fonttitle=\normalfont,
+    overlay={%
+        \begin{tcbclipinterior}%
+            \fill[block title example.bg!20!block body example.bg] (frame.south west)%
+                rectangle ([xshift=4mm]frame.north west);%
+        \end{tcbclipinterior}%
+    },%
+    #1
+}
+
+\NewTCBInputListing{\tcbexinputlst}{O{} O{} m O{Example}}{%
+    listing file={#3},
+    colbacktitle={block title example.bg},
+    coltitle={block title example.fg},
+    colback={block body example.bg},
+    fonttitle=\normalfont,
+    title={\blockstrut#4},
+    frame empty,
+    listing only,
+    listing options={%
+        numberstyle=\ttfamily\small\color{numbercolour},
+        numbersep=1.5ex,
+        aboveskip=0mm,
+        belowskip=0mm,
+        backgroundcolor=,
+        #1
+    },
+    overlay={%
+        \begin{tcbclipinterior}%
+            \fill[block title example.bg!20!block body example.bg] (frame.south west)%
+                rectangle ([xshift=4mm]frame.north west);%
+        \end{tcbclipinterior}%
+    },%
+    #2
+}
+
+\NewTCBInputListing{\tcbinputlst}{O{} O{} m}{%
+    listing file={#3},
+    colback={block body example.bg},
+    frame empty,
+    listing only,
+    listing options={%
+        numberstyle=\ttfamily\small\color{numbercolour},
+        numbersep=1.5ex,
+        aboveskip=0mm,
+        belowskip=0mm,
+        backgroundcolor=,
+        #1
+    },
+    overlay={%
+        \begin{tcbclipinterior}%
+            \fill[block title example.bg!20!block body example.bg] (frame.south west)%
+                rectangle ([xshift=4mm]frame.north west);%
+        \end{tcbclipinterior}%
+    },%
+    #2
+}
+
+% basic listings style
+\lstdefinestyle{basestyle}{
+%   === Text Formatting (font, style and color) ===
+    basicstyle=\ttfamily,               % Monospaced font for code
+    commentstyle=\color{commentcolour}, % Only change color for comments
+    keywordstyle=\bfseries\color{keywordcolour},    % Bold and color for keywords
+    numberstyle=\ttfamily\tiny\color{numbercolour}, % Monospaced (tiny) font for line numbers
+    stringstyle=\color{stringcolour},   % Only change color for strings
+%   === Code Formatting (spacing, line breaks, etc.) ===
+    breakatwhitespace=false,    % Don't break only at whitespace
+    breaklines=true,            % Enable automatic line breaks (when lines are too long)
+    keepspaces=true,            % TODO: Check if it would be better without this
+    showspaces=false,           % Spaces set to invisible
+    showstringspaces=false,     % Spaces in strings set to invisible
+    showtabs=false,             % Don't show tab characters
+    tabsize=2,                  % Tab size set to 2 spaces (this refers to the spaces used for tabs inside the code)
+    columns=[l]fullflexible,    % Column formatting, see listings manual for more information
+%   === Frame and Background Formatting (borders, padding, etc.) ===
+    frame=none,           % Single frame around code
+    framexleftmargin=0.5ex, % Padding from left frame to code
+    framesep=2pt,           % Padding between frame and code
+    framerule=.8pt,          % Thickness of frame (set to 0pt for no frame)
+    backgroundcolor=\usebeamercolor[bg]{block body example}, % Background color  
+    captionpos=b,           % Caption at the bottom
+%   === Size and Margin Setup ===
+    linewidth=\columnwidth, % Line width set to column width
+    xleftmargin=2.5ex,      % Left margin set to 2.5ex          % XXX: xleftmargin needs to be extended if line numbers reach 100
+%   === Line Number Formatting ===
+    numbers=left,   % Line numbers on the left
+    numbersep=2.5ex,  % Separation between line numbers and code
+%   === Encoding Setup ===
+    extendedchars=true,     % Allow for extended characters
+    inputencoding=cp1252,   % Windows-1252 encoding, as utf-8 is somewhat broken :(
+    escapeinside={(*@}{@*)},
+}
+
+% Define new if and new command for coloring angle brackets in listings after a # directive (e.g. #include <iostream>)
+% \newif\ifcoloranglebrackets
+% \coloranglebracketsfalse
+% \newcommand{\coloroncondition}[1][stringcolour]{\ifcoloranglebrackets\color{#1}\fi}
+
+\lstdefinestyle{latexstyle}{%
+    language=[LaTeX]TeX,
+    keywords={%
+        subsection,
+        subsubsection,
+        part,
+        chapter,
+        paragraph,
+        subparagraph,
+        operatorname,
+        DeclareMathOperator,
+        arcsinh,
+        hline,
+        includegraphics,
+        text,
+        usetikzlibrary,
+        tower,
+        endtower,
+        towerstep,
+        @ifnextchar,
+        titleformat,
+        theparagraph,
+        node,
+        draw,
+        coordinate
+    }
+}
+% C++ style for listings
+% \lstdefinestyle{cppstyle}{%
+% 	language=[11]C++,   % Set language to C++ 11
+% %   === Additional Default Keywords ===
+%     morekeywords={% For some odd reason, these keywords are not included in the default C++ 11 keyword list
+%         final,%
+%         override,%
+%     },
+% %   === Additional Types ===
+%     keywordstyle={[2]\color{keywordcolour}}, % [2] generates a second keyword style group
+%     morekeywords={[2]%
+% %       === cstdint (stdint.h) ===
+%         intmax_t,%
+%         int8_t,%
+%         int16_t,%
+%         int32_t,%
+%         int64_t,%
+%         int_least8_t,%
+%         int_least16_t,%
+%         int_least32_t,%
+%         int_least64_t,%
+%         int_fast8_t,%
+%         int_fast16_t,%
+%         int_fast32_t,%
+%         int_fast64_t,%
+%         intptr_t,%
+%         uintmax_t,%
+%         uint8_t,%
+%         uint16_t,%
+%         uint32_t,%
+%         uint64_t,%
+%         uint_least8_t,%
+%         uint_least16_t,%
+%         uint_least32_t,%
+%         uint_least64_t,%
+%         uint_fast8_t,%
+%         uint_fast16_t,%
+%         uint_fast32_t,%
+%         uint_fast64_t,%
+%         uintptr_t,%
+% %       === cstddef (stddef.h) ===
+%         ptrdiff_t,%
+%         size_t,%
+%         max_align_t,%
+%         nullptr_t
+%     },
+%     keywordstyle={[3]\color{green!70!blue}},
+% %   following code is used to colorize includes between angle brackets < >
+% %   source: https://tex.stackexchange.com/questions/409859/listings-how-to-colorize-strings-between-angle-brackets 
+%     moredelim=**[directive][\coloranglebracketstrue]\#, % directive is not documented, but only affects directives such as '#'
+%     moredelim=**[s][\coloroncondition]{<}{>} % Add a string delimiter that is colored if \coloranglebrackets is true
+% }
+
+
+% VHDL style for listings
+% \lstdefinestyle{vhdlstyle}{%
+%     language=VHDL,  % Set language to VHDL
+%     % upquote=false,  % TODO: Check if this is needed
+%     keywordstyle={[2]\color{orange}},
+% %   === Additional Types ===
+%     morekeywords={[2],%
+%         bit,%
+%         bit_vector,%
+%         boolean,%
+%         integer,%
+%         string,%
+%         std_logic,%
+%         std_logic_vector,%
+%         std_ulogic,%
+%         std_ulogic_vector,%
+%         time,%
+%         unsigned,%
+%         signed,%
+%         natural,%
+%         note,%
+%         warning,%
+%         error,%
+%         failure%
+%     },
+% %   === Additional Default Functions ===
+%     keywordstyle={[3]\color{blue!80!black}},
+%     morekeywords={[3],%
+%         rising_edge,%
+%         falling_edge,%
+%         ceil,%
+%         floor,%
+%         log2,%
+%         to_integer,%
+%         to_unsigned,%
+%         to_signed,%
+%         to_bit,%
+%         to_bitvector,%
+%         to_stdlogic,%
+%         to_stdulogic,%
+%         to_stdlogicvector,%
+%         to_stdulogicvector,%
+%         resize,%
+%         real,%
+%     },
+% %   === Additional String Delimiter ' ===
+%     morestring=[m]',
+% }
+
+\lstset{
+    style=basestyle,    % base style for listings (styles are cumulative)
+    style=latexstyle,
+    % style=cppstyle,     % C++ style for listings (builds on top of base style)
+    % style=vhdlstyle,    % VHDL style for listings (builds on top of base style)
+}
+
+
+
+
+% inline tikz node for later referencing
+\newcommand{\tn}[2]{% from https://tex.stackexchange.com/a/402466/121799
+    \ifmmode%
+    \tikz[remember picture,baseline= (#1.base),inner sep=0pt]{%
+        \node(#1){$#2$};
+    }%
+    \else%
+    \tikz[remember picture,baseline= (#1.base),inner sep=0pt]{%
+        \node(#1){#2};%
+        % \draw (#1.south west) to ++(0,-2mm) -| (#1.south east) -- (#1.south east);
+    }%
+    \fi%
+}
+
+\newcommand{\lstkw}[1]{\textcolor{keywordcolour}{\textbf{\texttt{#1}}}}
+
+\newcommand{\bslash}{\char`\\}
+\newcommand{\bropen}{\char`\{}
+\newcommand{\brclose}{\char`\}}
+
+\makeatletter
+\newcommand{\glyphdp}[1]{%
+\newbox\meas@bx%
+\setbox\meas@bx=\hbox{#1}%
+\the\dp\meas@bx%
+}
+
+\newcommand{\glyphht}[1]{%
+\newbox\meas@bx%
+\setbox\meas@bx=\hbox{#1}%
+\the\ht\meas@bx%
+}
+\makeatother
+
+
+\newcommand{\tablestrut}{\rule{0pt}{1.3em}}
+% \newtheorem{defblock}{\normalfont Definition}
+% \setbeamertemplate{theorems}[normal] % ensures upright text like Beamer defaults
+
+
+% \tcbuselibrary{theorems}
+% \newtcbtheorem[number within=section]{defblock}{Definition}%
+% {enhanced,
+%  colback=blue!5,
+%  colframe=blue!50!black,
+%  fonttitle=\bfseries,
+%  coltitle=black,
+%  sharp corners}{df}
+
+\DeclareMathOperator{\arcsinh}{arcsinh}
+
+\begin{document}
+
+\frame{
+  \maketitle
+}
+
+\begin{frame}{I lied to you \textsuperscript{sorry}}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+        smooth, samples = 100,
+        axis lines = left,
+        axis line style = { thick },
+        width = \textwidth,
+        height = \axisdefaultheight,
+        grid style = dashed,
+        xlabel = Complexity,
+        ylabel = Difficulty,
+        x label style={at={(axis description cs:1,.1)},anchor=east},
+        ytick = \empty,
+        xtick = {2, 4, 6, 11, 13, 16, 20, 22},
+        xticklabels = {Text, Figures, Tables, Math, Plots, {Technical\\ Report}, Thesis, Book},
+        xticklabel style = {align = center},
+        x tick label style = { rotate = 70, anchor = east, font=\footnotesize },
+        legend style = { legend pos = north west, legend cell align = left },
+        no markers, domain = 0:25,
+      ]
+        \plot[very thick, cyan, domain=0:14]{exp(x/3 - 2.5)};
+        \addlegendentry{Word}
+        \plot[very thick, blue, dashed]{3/(1 + exp(-2*(x-2.5))) + x/50*exp((x-4)/12)};
+        \addlegendentry{\textrm{\LaTeX}}
+        \plot[very thick, blue]{3/(1 + exp(-2*(x-2.5))) + x/50*exp((x-4)/12) + 2/(1 + exp(-2*(x-16)))};
+        \addlegendentry{Good \textrm{\LaTeX}}
+      \end{axis}
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Goals for today}
+  \Large
+  \begin{itemize}
+    \item Organize your \textrm{\LaTeXe} code because your last document was an \emph{absolute fucking mess}
+    \item Understand \emph{why the hell} the compiler is complaining
+    \item Consume your precariously short existence trying to learn to draw pictures with a terrible programming language called \emph{TikZ}
+  \end{itemize}
+\end{frame}
+
+% \begin{frame}{About this presentation}
+%   \begin{block}{Content}
+%     \begin{itemize}
+%       \item \textrm{\LaTeX} is \emph{learn by doing} \\
+%       \item Will be mostly examples
+%       \item Sorry for the crowded slides
+%     \end{itemize}
+%   \end{block}
+% 
+%   \begin{exampleblock}{Example}
+%     Things in green boxes are examples
+%   \end{exampleblock}
+% 
+%   \begin{alertblock}{Tip}
+%     Things in red boxes are tips or extras
+%   \end{alertblock}
+% \end{frame}
+
+% \begin{frame}{Do yourself a favor}
+%   \begin{alertblock}{Use the International US Keyboard Layout}
+%     \centering
+%     \vspace{3pt}
+%     % \includegraphics[height=9em]{figs/kbd-sg}
+%     % \\[5pt]
+%     \includegraphics[height=9em]{figs/kbd-us-intl}
+%   \end{alertblock}
+% \end{frame}
+
+\section{Absolute Basics to not ruin the typesetting}
+
+% \begin{frame}{Please enter the 21\textsuperscript{th} century}
+%   \begin{columns}
+%     \begin{column}{.2\textwidth}
+%       \begin{figure} \centering
+%         \includegraphics[height=8em]{figs/knuth}
+%       \end{figure}
+%       \begin{figure} \centering
+%         \includegraphics[height=8em]{figs/lamport}
+%       \end{figure}
+%     \end{column}
+%     \hfill
+%     \begin{column}{.8\textwidth}
+%       \begin{figure} \centering
+%         \begin{tikzpicture}
+%           \tikzset{
+%             block/.style = {
+%               draw, thick, rectangle,
+%               minimum height = 1cm,
+%               minimum width = 2cm,
+%               rounded corners,
+%               fill = lightgray,
+%             }
+%           }
+
+%           \node[block, fill=cyan] (TEX) at (2.5,2) {\textrm{\TeX}};
+%           \node[right] at (TEX.east) {1978};
+
+%           \node[block, color=black, fill=lightgray] (CONTEXT) at (-1,.5) {\textrm{\hologo{ConTeXt}}};
+%           \node[right, color=black] at (CONTEXT.east) {1996};
+
+%           \node[block] (XETEX) at (0,-2) {\textrm{\hologo{XeTeX}}};
+%           \node[left] at (XETEX.west) {2004};
+%           \node[block] (LATEX) at (2.5,-1) {\textrm{\LaTeX}};
+%           \node[left] at (LATEX.west) {1984};
+%           \node[block] (LUATEX) at (5,-2) {\textrm{\hologo{LuaTeX}}};
+%           \node[left] at (LUATEX.west) {2007};
+
+%           \draw[thick, ->] (TEX) to[out=-90, in=90] (LATEX);
+%           \draw[thick, ->] (TEX) to[out=-90, in=90] (XETEX);
+%           \draw[thick, ->] (TEX) to[out=-90, in=90] (LUATEX);
+%           \draw[thick, ->, draw=black] (TEX) to[out=-90, in=90] (CONTEXT);
+
+%           \node[block, fill=blue] (XELATEX) at (1,-4) {\textrm{\hologo{XeLaTeX}}};
+%           \node[block, fill=blue] (LUALATEX) at (4,-4) {\textrm{\hologo{LuaLaTeX}}};
+
+%           \draw[thick, ->] (XETEX) to[out=-90, in=90] (XELATEX);
+%           \draw[thick, ->] (LATEX) to[out=-90, in=90] (XELATEX);
+
+%           \draw[thick, ->] (LUATEX) to[out=-90, in=90] (LUALATEX);
+%           \draw[thick, ->] (LATEX) to[out=-90, in=90] (LUALATEX);
+
+%         \end{tikzpicture}
+%       \end{figure}
+%       \begin{center}
+%         A: Use \textrm{\hologo{XeLaTeX}}, it has UTF-8 support! (\"a, \"u, \^o, \ldots)
+%       \end{center}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+\begin{frame}[fragile]{Line breaks}
+
+  {\LARGE \bfseries Stop putting line breaks everywhere.}
+
+    \begin{exlisting}{Don't}
+%% wrong
+This is a sentence in the first paragraph. \\
+This is another paragraph.
+    \end{exlisting}
+
+  \begin{exlisting}{Do}
+This is a sentence in the first paragraph.
+
+This is another paragraph.
+  \end{exlisting}
+
+  Use \lstinline!\\! only in \lstinline!tabular!
+
+\end{frame}
+
+\begin{frame}[fragile]{Don't do manual styling}
+
+  \begin{exlisting}{Don't}
+I want that \textbf{this part} stands out.
+  \end{exlisting}
+
+  There is an \emph{emphasis} macro
+
+  \begin{exlisting}{Do}
+I want that \emph{this part} stands out.
+  \end{exlisting}
+
+  \href{https://github.com/HSR-Stud/Willkommen/blob/master/Guidelines.md#text-and-structure}{Click here} if you want to change how \lstinline!\emph! looks like.
+
+\end{frame}
+
+\begin{frame}[fragile]{Don't do manual styling (bis)}
+
+  {\LARGE \bfseries Never manually create headings}
+  
+  Yes, I've seen it done.
+
+  \begin{exlisting}{Don't}
+% NEVER do this
+\textit{\textsf{My custom heading}} \\[1em]
+  \end{exlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Customize headings}
+
+  \begin{exlisting}{With the \texttt{titlesec} package}
+% in the preamble
+\usepackage{titlesec}
+
+\titleformat{\paragraph}[hang]
+  {\normalfont\itshape\sffamily}
+  {\theparagraph}{1em}{}
+
+% later in the document
+\paragraph{My custom heading}
+  \end{exlisting}
+
+  \begin{block}{}
+    KOMA classes have their own customization commands
+  \end{block}
+\end{frame}
+
+% \begin{frame}[fragile]{Stop making ugly tables}
+%   \begin{table}
+%     \centering
+%     \begin{tabular}{l >{$}l<{$} >{$}l<{$}}
+%       \toprule
+%       \bfseries Coordinates & \textbf{Volume } dv & \textbf{Surface } d\vec{s}\\
+%       \midrule
+%       Cartesian & - & dx\,dy     \\
+%       Polar     & - & rd\,rd\phi \\
+%       Curvilinear & - & |\mathbf{J}_f|\,du\,dv \\
+%       \midrule
+%       Cartesian   & dx\,dy\,dz                         & \uvec{z}\,dx\,dy     \\
+%       Cylindrical & r\,dr\,d\phi\,dz                   & \uvec{z}r\,dr\,d\phi \\
+%                   &                                    & \uvec{\phi}\,dr\,dz  \\
+%                   &                                    & \uvec{r}r\,d\phi\,dz \\
+%       Spherical   & r^2\sin\theta\, dr\,d\theta\,d\phi & 
+%         \uvec{r}r^2\sin\theta\,d\theta\,d\phi \\
+%       Curvilinear & |\mx{J}_f|\,du\,dv\,dw & - \\
+%       \bottomrule
+%     \end{tabular}
+%     \caption{Differential elements for integration.}
+%   \end{table}
+% \end{frame}
+
+\section{Packages and classes}
+
+\begin{frame}[fragile]{What is a package?}
+  \begin{figure}[H]
+    \begin{tikzpicture}[
+        node distance = 1cm,
+        pics/file/.style args = {#1 #2 #3}{
+          code = {
+            \node[
+              outer sep = 0,
+              inner sep = 0,
+              minimum width = 1cm,
+              minimum height = 1.2cm,
+              #3
+            ] (#1) {#2};
+            \draw[
+              thick, fill = white,
+            ] ({#1}.north west) -- ($({#1}.north east) - (.3,0)$)
+                -- ++(0,-.3) -- ++(.3,0) -- ({#1}.south east)
+                -- ({#1}.south west) -- ({#1}.north west) -- cycle;
+            \draw[
+              fill = white,
+            ] ($({#1}.north east) - (.3,0)$) to ++(0,-.3) to ++(.3,0) to ++(-.3,.3) to cycle;
+            \draw[
+              black, thick,
+            ] ($({#1}.north east) - (.3,0)$) to ++(.3,-.3);
+            \node[
+              outer sep = 1mm,
+              inner sep = 0,
+              minimum width = 1cm,
+              minimum height = 1.2cm,
+            ] (#1) at (#1) {#2};
+          }
+        }
+      ]
+
+      \node[
+        draw = black, thick,
+        minimum height = 1.2cm,
+        minimum width = 1.5cm,
+        outer sep = 1mm,
+      ] (C) at (0,0) {\textrm{\hologo{XeLaTeX}}};
+
+      \draw pic{file = {STY .sty {left = 1.5cm of C}}}
+            node[
+              left = 3mm of STY,
+              align = right,
+              text width = 2.5cm
+            ] {Document style and macros}
+            node[
+              above = 0mm of STY,
+              anchor = south east,
+              text width = 2.5cm,
+              blue!80!black,
+            ] {``Package''};
+      \draw pic{file = {TEX .tex {above = 1.2cm of STY}}}
+            node[
+              left = 3mm of TEX,
+              align = right,
+              text width = 2.5cm
+            ] {Your text};
+      \draw pic{file = {CLS .cls {below = of STY}}}
+            node[
+              left = 3mm of CLS,
+              align = right,
+              text width = 2.5cm
+            ] {Document class}
+            node[
+              above = 0mm of CLS,
+              anchor = south east,
+              text width = 2cm,
+              blue!80!black,
+            ] {``Class''};
+
+
+      \draw[thick, ->] (TEX.east) to [out = 0, in = 160] (C);
+      \draw[thick, ->] (STY.east) to [out = 0, in = 180] (C);
+      \draw[thick, ->] (CLS.east) to [out = 0, in = 200] (C);
+
+      \draw pic{file = {PDF .pdf {right = 1cm of C}}}
+            node[
+              right = 3mm of PDF,
+              text width = 2cm
+            ] {Output};
+
+      \draw pic{file = {TOC .toc {below = 1cm of PDF}}}
+            node[
+              right = 3mm of TOC,
+              text width = 2cm,
+            ] {Auxilary files};
+      \draw pic{file = {LOG .log {below left = -13mm of TOC}}};
+      \draw pic{file = {AUX .aux {below left = -13mm of LOG}}};
+
+      \draw[thick, ->] (C) to (PDF);
+      \draw[thick, gray, ->] (C) to[out = -20, in = 120] (TOC.north west);
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\section{Why the \TeX{} compiler sucks}
+
+\begin{frame}{The root of the problem}
+  
+  {\Large 
+    Essentially, because D. Knuth is too clever.
+  }
+  
+  \begin{block}{DemocracyFTW on HN under 29672872}
+    \itshape
+    TeX uses recursive rewrites of the code that is the document to achieve
+    what it does, without properly keeping track of where it is and what it
+    does. There is no technical necessity for doing so, but the technique
+    introduces huge complexity costs. On a somewhat related note, TeX's syntax
+    at its very heart is also not trivial to parse short of executing
+    (compiling) a given document (i.e. TeX's syntax itself is Turing-complete).
+  \end{block}
+\end{frame}
+
+\begin{frame}{Turing completeness of \TeX}
+  \begin{block}{Sanity check}
+    Wait, so you're saying that in theory \TeX{} could compute \emph{anything}?
+    \textbf{YES}.
+  \end{block}
+  \begin{exampleblock}{Insane projects}
+    \begin{itemize}
+      \item AVR CPU emulator in \TeX{}: 
+        \href{https://www.ctan.org/pkg/avremu}{\texttt{avremu}} package
+      \item BASIC interpreter in \TeX{}:
+        \href{https://www.ctan.org/pkg/basix}{\texttt{BASIX}} package
+      \item ``Mars rover problem'' solution in \TeX{}:
+        \href{https://wiki.haskell.org/wikiupload/8/85/TMR-Issue13.pdf}{\texttt{link}}
+      \item Play reversi against an AI written in \TeX{} with
+        \href{https://mirror.foobar.to/CTAN/macros/generic/reverxii/reverxii.pdf}{\texttt{reverxii}}
+      \item Tower of Hanoi problem solution in \TeX{}:
+        \href{https://www.ctan.org/pkg/hanoi}{\texttt{hanoi}} package
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}
+
+\makeatletter
+\def\tower{\@ifnextchar[%
+  {\def\endtower{}\towerstep}%
+  {}%
+}%
+\def\towerstep[#1]{#1%
+  \@ifnextchar[%
+    {\edef\endtower{\endtower\egroup}%
+    ^\bgroup\towerstep}{\endtower}%
+}
+\makeatother
+
+\begin{frame}[fragile]{Let me give you an example}
+  \begin{columns}
+    \begin{column}{.6\linewidth}
+      \begin{exlisting}{Power tower function}
+\tower[a] % {a}
+\tower[a][b] % {a^{b}}
+\tower[a][b][c] % {a^{b^{c}}}
+      \end{exlisting}
+    \end{column}
+    \begin{column}{.4\linewidth}
+      \begin{exampleblock}{Output}
+        \Large
+        \[
+          \tower[a] \quad
+          \tower[a][b] \quad
+          \tower[a][b][c]
+        \]
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+  \lstset{language=python}
+  \begin{exlisting}{How you think it's done}
+def tower(args):
+  write("{")
+  for a in args:
+    write("%s^{" % a)
+  write("}" * len(args))
+  \end{exlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Let me give you an example}
+  \lstset{language=python}
+  \begin{exlisting}{How it's actually done}
+# txt is like a pointer or iterator
+def tower(txt):
+  endtower = ""
+
+  def step(t):
+    if nextchr(t) == "[":
+      endtower += "}"
+      write("%s^{" % t + step(nextchr(t)))
+    else:
+      write(endtower)
+
+  step(txt)
+  \end{exlisting}
+  \lstset{language=[LaTeX]TeX}
+\end{frame}
+
+\begin{frame}[fragile]{Let me give you an example}
+  \begin{exlisting}{Easy!}
+\makeatletter
+\def\tower{\@ifnextchar[
+  {\def\endtower{}\towerstep}
+  {}
+}
+\def\towerstep[#1]{#1%
+  \@ifnextchar[
+    {\edef\endtower{\endtower\egroup}
+      ^\bgroup\towerstep}
+    {\endtower}
+}
+\makeatother
+  \end{exlisting}
+\end{frame}
+
+\begin{frame}{What execution (compiling) looks like}
+  \begin{block}{Execution flow}
+    \begin{enumerate}
+      \item Load file
+      \item Recursively expand macros (in the aux file)
+      \item Something goes wrong
+      \item You're probably deep in a recursion but you don't know because you don't keep a stack
+      \item Print an incomprehensible message about a missing variable or something
+      \item Wait for user input or die
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Amazing error messages}
+  \begin{block}{Almost as good as C++ template errors}
+    \footnotesize
+    \begin{verbatim}
+) [13] (/var/folders/w1/cmd2jfv1229gcxvtdyfg1vjc0000gn/T/latex-build-1457ae9381593aa61ed49d5df3bb1135/advanced.toc) [14] [15] (/var/folders/w1/cmd2jfv1229gcxvtdyfg1vjc0000gn/T/latex-build-1457ae9381593aa61ed49d5df3bb1135/advanced.vrb (/Users/npross/Library/TinyTeX/texmf-dist/tex/latex/listings/lstlang1.sty)) [16] (/var/folders/w1/cmd2jfv1229gcxvtdyfg1vjc0000gn/T/latex-build-1457ae9381593aa61ed49d5df3bb1135/advanced.vrb) [17]
+Runaway argument?
+{{Let me give you an example} \begin {block}{Easy!} \begin {lstlistin\ETC.
+./advanced.tex:555: Paragraph ended before \beamer@@@checkoldframe was complete.
+<to be read again> 
+                   \par 
+l.555 
+      
+Output written on /var/folders/w1/cmd2jfv1229gcxvtdyfg1vjc0000gn/T/latex-build-1457ae9381593aa61ed49d5df3bb1135/advanced.pdf (17 pages).
+Transcript written on /var/folders/w1/cmd2jfv1229gcxvtdyfg1vjc0000gn/T/latex-build-1457ae9381593aa61ed49d5df3bb1135/advanced.log.
+    \end{verbatim}
+  \end{block}
+\end{frame}
+
+\section{TikZ ist kein Zeichenprogramm}
+
+\begin{frame}[fragile]{What is TikZ}
+
+{\Large\bfseries TikZ = TikZ ist kein Zeichenprogramm}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning, ...}
+\end{lstlisting}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+\begin{figure}
+  \centering
+  \begin{tikzpicture}[
+      % global settings / styles
+    ]
+
+    % drawing commands
+
+  \end{tikzpicture}
+  \caption{... \label{fig:...}}
+\end{figure}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Elements}
+
+  {\bfseries Basics}
+  \begin{itemize}
+    \item \lstinline!\coordinate (name)  at (x,y);!
+    \item \lstinline!\node[options] (name)  at (x,y)  {label};!
+    \item \lstinline!\draw[options] commands;!
+    \item \lstinline!\fill[options] commands;!
+  \end{itemize}
+
+  {\bfseries Drawing commands}
+  \begin{itemize}
+    \item Line \lstinline!(A)  -- (B)!
+    \item Horiz. then vert. line \lstinline!(A)  -| (B)!
+    \item Vert. then horiz. line \lstinline!(A)  |- (B)!
+    \item Quadratic B\'ezier \lstinline!(A) ..  controls (P)  and (Q)  .. (B)!
+    \item Advanced curve \lstinline!(A)  to[options] (B)!
+    \item Nodes \lstinline!node[options] (name) {label}!
+    \item Shapes \lstinline!(A) rectangle (B)!, \lstinline!(A) circle (2cm)!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Basic example}
+  \begin{columns}
+    \begin{column}{.75\linewidth}
+      \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+\begin{tikzpicture}
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (2cm,18mm);
+  % no units = cm
+
+  \draw[thick] (O) -- (A);
+  \draw[thick, dotted, blue] 
+    (O) -| (A);
+
+  \draw[ultra thick, ->, gray]
+    (O) -- ++(5mm, -5mm);
+
+  \fill[thick, draw = black,
+    fill = red!40] (O) circle (2mm);
+
+  \node[above] at (A) {\(P_2\)};
+\end{tikzpicture}\end{lstlisting}
+    \end{column}
+    \begin{column}{.25\linewidth}
+      \centering
+      \begin{tikzpicture}
+        \coordinate (O) at (0,0);
+        \coordinate (A) at (2cm,18mm);
+        % no units = cm
+
+        \draw[thick] (O) -- (A);
+        \draw[thick, dotted, blue] 
+          (O) -| (A);
+
+        \draw[ultra thick, gray, ->]
+          (O) -- ++(5mm, -5mm);
+
+        \fill[thick, draw=black,
+          fill=red!40] (O) circle (2mm);
+
+        \node[above] at (A) {\(P_2\)};
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Example with nodes}
+  \begin{columns}
+    \begin{column}{.8\linewidth}
+      \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+\node (A) at (0,0) {A node};
+
+\node[
+  rectangle, very thick,
+  draw = black, fill = green!20,
+  font = \bfseries\slshape,
+  % positioning library
+  below = 5mm of A,
+] (B) {Boxed};
+
+\node[
+  circle, thick,
+  draw = black, fill = magenta!20,
+  below = 1cm of B,
+] (C) {\(m\)};
+
+\draw[very thick, gray, ->]
+  (C.east) to[bend right] (B.south east);\end{lstlisting}
+    \end{column}
+    \begin{column}{.2\linewidth}
+      \centering
+      \begin{tikzpicture}
+        \node (A) at (0,0) {A node};
+
+        \node[
+          rectangle, very thick,
+          draw = black, fill = green!20,
+          font = \bfseries\slshape,
+          below = 5mm of A,
+        ] (B) {Boxed};
+
+        \node[
+          circle, thick,
+          draw = black, fill = magenta!30,
+          below = 1cm of B,
+        ] (C) {\(m\)};
+
+        \draw[very thick, gray, ->]
+          (C.east) to[bend right] (B.south east);
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{TikZ V: Matrix and scope}
+  \begin{columns}
+    \begin{column}{.8\linewidth}
+      \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+\matrix (M) [ % node with table of nodes
+  row sep = 8mm,
+  column sep = 4mm,
+  nodes = {
+    circle, thick,
+    draw = black,
+    fill = magenta!30,
+    outer sep = 1mm,
+  },
+]{
+  \node (A) {A}; & \node (B) {B}; \\
+  \node (X) {X}; \\
+};
+
+\begin{scope}[ultra thick, gray, ->]
+  \draw (X) -- (A);
+  \draw (X) to[out = 0, in = -90] (B);
+\end{scope}\end{lstlisting}
+    \end{column}
+    \begin{column}{.2\linewidth}
+      \centering
+      \begin{tikzpicture}
+        \matrix (M) [
+          row sep = 8mm,
+          column sep = 4mm,
+          nodes = {
+            circle, thick,
+            draw = black,
+            fill = magenta!30,
+            outer sep = 1mm,
+          },
+        ]{
+          \node (A) {A}; & \node (B) {B}; \\
+          \node (X) {X}; &               \\
+        };
+
+        \begin{scope}[ultra thick, gray, ->]
+          \draw (X) -- (A);
+          \draw (X) to[out = 0, in = -90] (B);
+        \end{scope}
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\frame{
+  \centering
+  \resizebox{!}{30pt}{
+    {\Huge \bfseries\scshape The End}
+  }
+  \vspace{5mm}
+  \newline
+  {It wasn't worth the time I know, but hey, \newline
+  at least now you know how to draw pretty pictures}
+}
+
+\end{document}
+
+% vim:et:ts=2:sw=2:wrap:nolinebreak:

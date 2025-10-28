@@ -1,7 +1,7 @@
 \begin{frame}
     \frametitle{Images -- The \texttt{graphicx} Package}
     \framesubtitle{\texttt{\bslash includegraphics} Command}
-    \only<-3>{%
+    \only<-3|handout:1>{%
     \Large
     {\normalsize\textit{Preamble}}
 
@@ -13,24 +13,24 @@
     \texttt{\bslash\lstkw{includegraphics}[\tn{gfxopt}{width=5cm}]\bropen\tn{gfxpath}{example-image-a}\brclose}}
 
     \begin{tikzpicture}[remember picture, overlay]
-        \only<2-3>{%
+        \only<2-3|handout:1>{%
         \node[draw, thick, fit={(gfxopt)}, inner xsep=0.5pt, inner ysep=2pt] (gfxoptoutline){};
         \node[below left=5mm and 0cm of gfxopt] (opttext) {\raggedleft Formatting options};
         \draw[thick] (opttext) -| (gfxoptoutline);
         }
-        \only<3>{%
+        \only<3|handout:1>{%
         \node[draw, thick, fit={(gfxpath)}, inner xsep=0.5pt, inner ysep=1pt] (gfxpathoutline){};
         \node[below right=5mm and 0cm of gfxpath] (pathtext) {Image path};
         \draw[thick] (pathtext) -| (gfxpathoutline);
         }
     \end{tikzpicture}
     
-    \only<4->{%
+    \only<4-|handout:2>{%
     \Large
     \texttt{\bslash\lstkw{includegraphics}[<options>]\bropen<path-to-image>\brclose}}
     
     \bigskip
-    \only<4-8>{%
+    \only<4-8|handout:2>{%
         \Large\textbf{Formatting Options}
 
         \medskip
@@ -57,7 +57,7 @@
             & Image cropping\\
         \end{tabular}
     }
-    \only<9->{%
+    \only<9-|handout:3>{%
         \Large\textbf{Supported Image Formats}
 
         \medskip

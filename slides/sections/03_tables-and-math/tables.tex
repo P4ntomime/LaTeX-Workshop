@@ -16,28 +16,28 @@
     \texttt{\bslash}\lstkw{end}\texttt{\bropen\tn{envname2}{tabular}\brclose}
     \tikz[remember picture, overlay]{%
         \coordinate[right=2cm of tabopt](textleft);
-    \only<3,10>{%
+    \only<3,10|handout:1>{%
         \node[anchor=west] at (textleft)(coldesc){Column description};
         \node[thick,draw,fit={(tabopt)}, inner sep=.2pt, inner ysep=1pt] (taboptoutline) {};
         \draw[thick] (taboptoutline.east) -- (coldesc);
     }
-    \only<5-6,10>{%
+    \only<5-6,10|handout:1>{%
         \node[thick, draw, fit={(amp1)(amp2)}, inner sep=1pt] (ampersands) {};
         \node[text width=9em, anchor=west, align=left] at (amp1-|textleft) (coldelimtext) {Column delimiter};
         \draw[thick] (ampersands) -- ++(5cm,0cm) |- (coldelimtext);
     }
-    \only<6,10>{%
+    \only<6,10|handout:1>{%
         \node[text width=9em, anchor=west, align=left] at (newline-|textleft) (eortext){End of row};
         \node[thick, draw, fit={(newline)}, inner xsep=.5pt, inner ysep=1pt] (eor){};
         \draw[thick] (eor) -- (eortext);
     }
-    \only<8,10>{%
+    \only<8,10|handout:1>{%
         \node[thick, draw,fit={(hlinecmd)}, inner xsep=.5pt, inner ysep=1pt] (hlineoutline){};
         \draw[thick] (hlineoutline) -- (hlineoutline-|textleft) node[right]{Horizontal line};
     }
     }
     \end{column}
-    \begin{column}<11>{.48\textwidth}
+    \begin{column}<11|handout:2>{.48\textwidth}
         \small
         \begin{tabular}{l c r}
             left

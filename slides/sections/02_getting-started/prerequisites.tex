@@ -145,7 +145,12 @@
         }%
     \end{center}
     \begin{tikzpicture}[overlay, remember picture, thick]
-        
+        \node[draw, dashed,fit={(envname1)}, inner xsep=0.5pt, inner ysep=1pt] (env1outline){};
+        \node[draw, dashed,fit={(envname2)}, inner xsep=0.5pt, inner ysep=1pt] (env2outline){};
+        \node[above right=5mm and 5mm of env1outline] (envnametxt){Environment name};
+
+        \draw (env1outline) -| (envnametxt);
+        \draw (env2outline) -| (envnametxt);
     \end{tikzpicture}
 \end{frame}
 
