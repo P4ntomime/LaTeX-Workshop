@@ -1,7 +1,16 @@
 \begin{frame}
+    \frametitle{Bibliography}
+    \framesubtitle{Idea}
+    \begin{itemize}
+        \item<+-> One ``database'' file containing reference data
+        \item<+-> Use \lstinline|\\cite\{\}| for citations
+    \end{itemize}
+\end{frame}
+\begin{frame}
     \frametitle{Bibliography -- The \texttt{biblatex} package}
-    \framesubtitle{Principle}
+    \framesubtitle<1>{Principle}
 
+    \only<1>{%
     \begin{center}
         \begin{tikzpicture}[every node/.style={thick,rounded corners,draw, minimum width=3em, minimum height=1.2em}, >={Latex}]
             \node (latex1) {\LaTeX};
@@ -18,5 +27,12 @@
             \draw[thick,->] (biber) -- (latex2);
             \draw[thick,->] (compilation) -- (pdffile);
         \end{tikzpicture}
-    \end{center}
+    \end{center}}
+
+    \framesubtitle<2->{Database File}
+    \only<2>{%
+    \tcbexinputlst[language={},linerange={30-36}]{listings/bibliography.bib}
+
+    For full list of available entries, read the \texttt{biblatex} documentation.
+    }
 \end{frame}

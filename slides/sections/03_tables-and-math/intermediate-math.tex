@@ -8,6 +8,13 @@
     % the limits will appear below and above the symbols, as we would expect.
     % If we desire this behavior in inline math as well, 
     % there's a fix for this: The \limits command.
+    \note{%
+    \begin{itemize}
+        \item This looks weird\ldots
+        \item Because of inline-math mode (tries to minimize vertical size)
+        \item We need displaymath behavior 
+        \item Solution: limits command
+    \end{itemize}}
     \begin{center}
         \Large%
         But wait, this looks weird!?
@@ -38,7 +45,7 @@
             \begin{exlisting}{Example}
 A different inline sum
 $\sum\limits_{i = 0}^{n} a_n$
-is easy.
+is easy.    
             \end{exlisting}
         \end{column}
         \begin{column}{.48\textwidth}
@@ -88,6 +95,52 @@ $\operatorname{arccosh}x + \arcsinh y$
             \vspace{1em}
 
             $\operatorname{arccosh}x + \arcsinh y$
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Exercise}
+    \begin{columns}
+        \begin{column}{.48\textwidth}
+            \begin{align*}
+                x_{t+1} 
+                    &= kx_t (1 - x_t) \\[1.2em]
+                H 
+                    &= - \sum_{i = 0}^{N} p(x_i) \log p(x_i)
+            \end{align*}
+            \begin{center}
+                Advanced:
+            \end{center}
+            \begin{align*}
+                \mathcal{L}^{-1}\{F\} 
+                    &=  \lim_{T \to \infty}
+                        \frac{1}{2\pi i}
+                        \int\limits_{\gamma - iT}^{\gamma + iT}
+                        e^{st} F(s) \,\mathrm{d}s
+            \end{align*}
+        \end{column}
+        \begin{column}{.48\textwidth}
+            \begin{block}{\blockstrut Resources}
+                \centering
+                List of \LaTeX{} Mathematical Symbols
+
+                \medskip
+                \qrcode[%
+                    level=L, 
+                    version=0,
+                    height=2cm]{https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols}
+                
+                
+                \bigskip
+                Overleaf Documentation
+                
+                \medskip
+                \qrcode[%
+                    level=L, 
+                    version=0,
+                    height=2cm]{https://www.overleaf.com/learn}                
+            \end{block}
         \end{column}
     \end{columns}
 \end{frame}

@@ -41,7 +41,7 @@
         Multiplication
         & \lstinline|\\cdot|
         & $e \cdot f$
-        & Do \textbf{not} use \texttt{*} or \lstinline|\\times|!\\
+        & Do \emph{not} use \texttt{*} or \lstinline|\\times|!\\
     \midrule\pause
         Division
         & \lstinline|\\frac\{\}\{\}|
@@ -51,7 +51,7 @@
         Exponential
         & \lstinline|^\{\}|
         & $i^{j}$
-        & Sometimes also reffered to as \emph{superscript}.\\
+        & Sometimes also referred to as \emph{superscript}.\\
     \midrule\pause
         Root
         & \lstinline|\\sqrt[]\{\}|
@@ -59,6 +59,37 @@
         & The optional parameter is for non-square roots e.g. $\sqrt[3]{m}$.\\
     \end{tabular}
     \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Math}
+    \framesubtitle{Text In Math and Indices}
+    \only<1-4>{%
+    \begin{center}
+    \begin{tabular}{c p{18em}}
+        \textbf{Command}
+        & \textbf{Definition}\\
+    \toprule[1.2pt]\pause
+        \lstinline|\\text\{\}|
+        & Inserts regular text\\
+    \midrule\pause
+        \lstinline|\\mathrm\{\}|
+        & Sets font to math-roman (\emph{not} equivalent to \lstinline|\\text\{\}|)\\
+    \midrule\pause
+        \lstinline|_\{\}|
+        & Indices of a variable. Sometimes also referred to as \emph{subscript}.\\
+    \end{tabular}
+    \end{center}}
+    \only<5->{%
+    \begin{columns}
+        \begin{column}{.54\textwidth}
+            \tcbexinputlst{listings/math-text.tex}
+        \end{column}
+        \begin{column}{.44\textwidth}
+            \input{listings/math-text.tex}
+        \end{column}
+    \end{columns}
+    }
 \end{frame}
 
 \begin{frame}
@@ -138,6 +169,7 @@
 \begin{frame}
     \frametitle{Math}
     \framesubtitle{Integrals and Derivatives}
+    \only<1-3>{%
     \begin{center}
     \begin{tabular}{l c c}
         \textbf{Operation}
@@ -153,5 +185,16 @@
         & $\int_{a}^{b} x d\,x$\\
     \end{tabular}
     \end{center}
+    }
+    \begin{alertblock}<4->{\blockstrut Remark}
+        Some people prefer typesetting it as
+        \[
+            \frac{\operatorname{d} }{\operatorname{d} x}
+            \qquad
+            \text{and}
+            \qquad
+            \int x \operatorname{d} x,
+        \]
+        using \lstinline|\\operatorname\{d\}| instead of simply \lstinline|d|.
+    \end{alertblock}
 \end{frame}
-

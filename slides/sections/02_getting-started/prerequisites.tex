@@ -7,7 +7,7 @@
             \item \hologo{MiKTeX}
             \item Mac\TeX{}
         \end{itemize}
-        \item Or use Overleaf (account required!)
+        \item Or use \href{https://www.overleaf.com/}{Overleaf} (account required!)
         \item Basic Syntax knowledge
     \end{itemize}
 \end{frame}
@@ -25,6 +25,19 @@
     % In some cases there is also an optional argument as we see here `[...]`, 
     % though as the name implies, we can almost always omit this. 
     % These are the very basics of commands and we'll expand on this later on in the advanced section.
+    \note{%
+    \begin{itemize}
+        \item Start with basic syntax knowledge
+        \item Essential component of \LaTeX{} are \emph{commands} -- sometimes also referred to as \emph{macros}
+        \item Here's an example
+        \item Consists of
+        \begin{itemize}
+            \item Backslash -- mention briefly that it is a reserved character
+            \item Command name (letters only)
+            \item Argument
+            \item Optional argument
+        \end{itemize}
+    \end{itemize}}
     \begin{center}
         % TODO: swap command with optional argument as last one to appear.
         \LARGE
@@ -109,6 +122,15 @@
     % These commands are a bit special, as they always have to come in pairs.
     % I.e. there is no `\begin{name}` without `\end{name}` and vice-versa.
     % The `name` can be any given predefined environment name -- in this case the name is `document`.
+    \note{%
+    Next up: environments
+    \begin{itemize}
+        \item Imagine we have content
+        \item We want to apply certain rules to content
+        \item Content ideally isn't just one line
+        \item Could use commands, but gets convoluted and impractical with size
+        \item Solution: environment surrounding content with begin and end
+    \end{itemize}}
     \begin{center}
         \LARGE
         \parbox{20ex}{%

@@ -1,0 +1,70 @@
+\begin{frame}
+    \frametitle{Math -- The \texttt{amsmath} Package}
+    \framesubtitle{Matrices}
+    \only<1>{{\normalsize\textit{Preamble}}
+
+    {\Large\texttt{\bslash\lstkw{usepackage}\bropen amsmath\brclose}}}
+    \only<2->{%
+    \begin{columns}
+        \begin{column}{.48\textwidth}
+            \begin{center}
+                \begin{tabular}{@{}l@{\hspace{1ex}}c@{\hspace{1ex}}c@{}}
+                    \textbf{Matrix Type}
+                    & \textbf{Environment}
+                    & \textbf{Example}\\
+                \toprule[1.2pt]\pause
+                    Plain
+                    & \texttt{matrix}
+                    & $\displaystyle \begin{matrix}
+                        a & b\\
+                        c & d
+                    \end{matrix}$\\
+                \midrule\pause
+                    Parentheses
+                    & \texttt{pmatrix}
+                    & $\displaystyle \begin{pmatrix}
+                        a & b\\
+                        c & d
+                    \end{pmatrix}$\\
+                \midrule\pause
+                    Brackets
+                    & \texttt{bmatrix}
+                    & $\displaystyle \begin{bmatrix}
+                        a & b\\
+                        c & d
+                    \end{bmatrix}$\\
+                \end{tabular}
+            \end{center}
+        \end{column}
+        \begin{column}{.48\textwidth}
+            \begin{center}
+                \begin{tabular}{@{}l@{\hspace{1ex}}c@{\hspace{1ex}}c@{}}
+                    \textbf{Matrix Type}
+                    & \textbf{Environment}
+                    & \textbf{Example}\\
+                \toprule[1.2pt]\pause
+                    Braces
+                    & \texttt{Bmatrix}
+                    & $\displaystyle \begin{Bmatrix}
+                        a & b\\
+                        c & d
+                    \end{Bmatrix}$\\
+                \midrule\pause
+                    Pipes
+                    & \texttt{vmatrix}
+                    & $\displaystyle \begin{vmatrix}
+                        a & b\\
+                        c & d
+                    \end{vmatrix}$\\
+                \midrule\pause
+                    Double Pipes
+                    & \texttt{Vmatrix}
+                    & $\displaystyle \begin{Vmatrix}
+                        a & b\\
+                        c & d
+                    \end{Vmatrix}$\\
+                \end{tabular}
+            \end{center}
+        \end{column}
+    \end{columns}}
+\end{frame}
