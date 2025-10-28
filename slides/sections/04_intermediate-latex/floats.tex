@@ -25,8 +25,8 @@
     \begin{tikzpicture}[thick,remember picture, overlay, every node/.style={inner xsep=0.5pt, inner ysep=1pt}]
         \coordinate[right=5cm of placement] (txtleft);
         \only<2,7>{%
-        \node[draw, dashed, fit={(placement)}] (placementoutline){};
-        \node[anchor=west] at (placement-|txtleft) (placementtxt) {Placement option};
+        \node[draw, dashed, fit={(placement)}, yshift=.3pt] (placementoutline){};
+        \node[anchor=west] at (placementoutline-|txtleft) (placementtxt) {Placement option};
         \draw (placementoutline) -- (placementtxt);}
 
         \only<3,7>{%
@@ -55,7 +55,7 @@
     \toprule[1.2pt]
     \onslide<9-13>
         h
-        & Place figure \emph{here} (\emph{approximately}).\\
+        & Place figure \emph{here} (approximately).\\
     \midrule
     \onslide<10-13>
         t
